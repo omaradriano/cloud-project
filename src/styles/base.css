@@ -92,12 +92,14 @@ body {
 /* -------------------------- */
 
 .body {
+    position: relative;
     grid-area: body;
     background-color: #fff;
     padding: 20px;
+    min-height: 500px;
 }
 
-.body_container {
+.landingContainer__body {
     position: relative;
     background-color: #DCDDE4;
     height: 100%;
@@ -108,28 +110,62 @@ body {
     align-items: center;
 }
 
-.body_container > img {
+.landingContainer__body > img {
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translate(-50%,0);
-    height: 50%;
-    min-height: 300px;
+    height: 55%;
 }
 
-.body_container_data {
-    margin-top: 60px;
+.landingContainer__info {
+    position: absolute;
+    top: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 }
 
-.body_container_data > h3 {
+.landingContainer__info > h3 {
     text-align: center;
-    font-size: 24px;
 }
 
 .btn_captureData {
     margin-top: 10px;
+}
+
+/* -------------------------- */
+/* PROFILE HOVER */
+/* -------------------------- */
+
+.profileHover {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+
+    display: flex;
+
+    width: 250px;
+    padding: 10px;
+
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.profileHover--noauth {
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+}
+
+.profileHover > input {
+    height: 50%;
+    /* margin: 2px; */
+    width: 100%;
+}
+
+.profileHover > input:nth-child(1){
+    margin-bottom: 10px;
 }
