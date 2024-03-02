@@ -1,9 +1,15 @@
 
-const Icon = ({icon, className='material-icons', customIconClassName=''}) => {
+const Icon = ({icon, className='material-icons', customIconClassName='', action=undefined}) => {
     let style = `${className} ${customIconClassName}`
     return(
         <>
-            <span className={style}>{icon}</span>
+            {
+                action !== undefined ? (
+                    <span className={style} onClick={()=>{action()}}>{icon}</span>
+                ) : (
+                    <span className={style}>{icon}</span>
+                )
+            }
         </>
     )
 }
