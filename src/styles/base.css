@@ -191,13 +191,15 @@ body {
 }
 
 .selectFile > select {
-    width: 80%;
-    margin-bottom: 45px;
+    width: clamp(300px, 80%, 420px);
+    margin-bottom: 35px;
     font-size: 18px;
     border: none;
     border-radius: 5px;
-    height: 32px;
+    height: 40px;
+    min-height: 40px;
     text-align: center;
+    background-color: rgb(218, 218, 218);
 }
 
 .selectFile > select:focus {
@@ -205,13 +207,16 @@ body {
 }
 
 .imgFileContainer {
-    aspect-ratio: 16/9;
-    width: 80%;
+    aspect-ratio: 0.7727;
     margin-bottom: 35px;
+    /* height: 100%; */
+    width: 100%;
+    max-width: 300px;
+    /* background-color: red; */
 }
 
 .imgFileContainer > img {
-    width: 100%;
+    height: 100%;
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
