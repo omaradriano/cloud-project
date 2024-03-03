@@ -41,6 +41,11 @@
 /* Components */
 /* -------------------------- */
 
+.modal {
+    position: absolute;
+    right: 0;
+}
+
 .btn{
     text-decoration: none;
     cursor: pointer;
@@ -175,7 +180,7 @@ body {
     z-index: 1;
 
     display: none;
-    padding: 20px;
+    padding: 10px;
 
     background-color: #fff;
     border: 1px solid gray;
@@ -188,14 +193,14 @@ body {
     flex-direction: column;
     align-items: center;
     /* height: 120px; */
-    bottom: -140px;
+    bottom: -155px;
     height: auto;
 }
 
 .profileHover--preauth {
     width: 380px;
     display: flex;
-    bottom: -255px;
+    bottom: -270px;
     flex-direction: column;
 }
 .profileHover--preauth > div {
