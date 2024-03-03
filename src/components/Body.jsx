@@ -6,7 +6,9 @@ const Body = () => {
     const navigate = useNavigate();
     let location = useLocation();
 
-    //La primera vez que carga la pagina nos va a redirigir hacia /home para poder renderizar las vista
+    /**
+     * La primera vez que se carga la pagina, nos redirige a la ruta /home
+     */
     useEffect(() => {
         if (location.pathname === '/') navigate('/home')
     }, [])
@@ -14,6 +16,9 @@ const Body = () => {
     return (
         <>
             <div className="body">
+                {/**
+                 * Recordar que Outlet sirve para renderizar dentro los componentes que se manejen por react router   
+                 */}
                 <Outlet />
             </div>
         </>

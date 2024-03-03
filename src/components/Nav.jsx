@@ -13,9 +13,7 @@ const Nav = () => {
     };
 
     function closeModal(){
-        setTimeout(() => {
-            setModalVisible(false)
-        }, 0);
+        setModalVisible(false)
     }
 
     return (

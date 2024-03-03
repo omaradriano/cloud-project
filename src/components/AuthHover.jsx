@@ -3,6 +3,12 @@ import { Link } from "react-router-dom"
 
 const AuthHover = ({ mode = 'noauth', unmount, visible }) => {
 
+    /**
+     * 
+     * @param {*} event 
+     * Esta funcin maneja el montar y desmontar un handleClick para desaparecer el profileHover en caso de
+     * hacer click fuera de el. Mera funcionalidad de UX(?).
+     */
     function handleClick(event) {
         if (!event.target.closest('.profileHover') && !event.target.closest('.pointer')) {
             // console.log('Si jala')

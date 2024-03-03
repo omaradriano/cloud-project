@@ -23,6 +23,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+/**
+ * Browser router donde se agregan las rutas, estas son renderizadas en el Outlet
+ */
 const router = createBrowserRouter([
   {
     path: "/",
