@@ -10,9 +10,11 @@ import './styles/media-992.css'
 import './styles/media-1200.css'
 
 // Router components
-import Landing from './components/Landing.jsx'
-import SignUp from './components/SignUp.jsx'
-import SignIn from './components/SignIn.jsx'
+import Landing from './components/Body/Landing.jsx'
+import SignUp from './components/Body/SignUp.jsx'
+import SignIn from './components/Body/SignIn.jsx'
+import Profile from './components/Body/Profile.jsx'
+import SelectFile from './components/Body/SelectFile.jsx'
 
 import 'material-icons/iconfont/material-icons.css';
 
@@ -20,7 +22,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Profile from './components/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/profile/", //Aqui se debe de agregar el usuario loggeado de forma dinamica
         element: <Profile />
+      },
+      {
+        path: "/selectFile",
+        element: <SelectFile />
       }
     ]
   },
