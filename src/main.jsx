@@ -37,18 +37,18 @@ const router = createBrowserRouter([
         element: <Landing />,
         default: true
       },
-      {
-        path: "/signup",
-        element: <SignUp />
-      },
-      {
-        path: "/signin",
-        element: <SignIn />
-      },
-      {
-        path: "/profile/", //Aqui se debe de agregar el usuario loggeado de forma dinamica
-        element: <Profile />
-      },
+      // {
+      //   path: "/signup",
+      //   element: <SignUp />
+      // },
+      // {
+      //   path: "/signin",
+      //   element: <SignIn />
+      // },
+      // {
+      //   path: "/profile/", //Aqui se debe de agregar el usuario loggeado de forma dinamica
+      //   element: <Profile />
+      // },
       {
         path: "/selectFile",
         element: <SelectFile />

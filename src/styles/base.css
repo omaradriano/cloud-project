@@ -6,8 +6,10 @@
 }
 
 :root {
-    --bg-aux: #092E6E;
-    --btn-color: #FFCC02;
+    --tec-blue-color: #092E6E;
+    --tec-red-color: #d5010f;
+    --tec-yellow-color: #ffcd00;
+    --input-color: #e8e7ea;
 }
 
 .mainTitle {
@@ -54,11 +56,12 @@
     border-radius: 10px;
     padding: 5px 10px;
     border: 2px solid black;
-    background-color: var(--btn-color);
+    background-color: var(--tec-yellow-color);
 }
 
 body {
     min-width: 100%;
+    max-width: 100%;
     width: 100vw;
     min-height: 700px;
 }
@@ -86,9 +89,11 @@ body {
     grid-area: header;
     /* background-color: red; */
     display: flex;
+    width: 100%;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding: 10px 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px;
     flex-wrap: nowrap;
 }
 
@@ -104,7 +109,7 @@ body {
 .nav {
     position: relative;
     grid-area: nav;
-    background-color: var(--bg-aux);
+    background-color: var(--tec-blue-color);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -221,6 +226,74 @@ body {
 }
 
 /* -------------------------- */
+/* BODY */
+/*      SIGNUP */
+/* -------------------------- */
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup > h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.inputData {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 420px;
+    height: auto;
+}
+
+.inputData__label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.inputData__input, .inputData__select {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    height: 32px;
+    background-color: var(--input-color);
+}
+
+.btn__signup {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.inputData__validation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.activeInput > input:focus {
+    border: 1px solid green;
+}
+.validationIcon{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.validationOK > span {
+    color: green;
+}
+.validationERR > span {
+    color: red;
+}
+/* -------------------------- */
 /* PROFILE HOVER */
 /* -------------------------- */
 
@@ -313,5 +386,17 @@ body {
     to {
         opacity: 1;
     }
+}
+
+/* -------------------------- */
+/* EXTRAS */
+/* -------------------------- */
+/* Eliminar las flechas en los input number */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button,
+input[type='number'] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
 }
 
