@@ -17,6 +17,7 @@ import Profile from './components/Body/Profile.jsx'
 import SelectFile from './components/Body/SelectFile.jsx'
 
 import 'material-icons/iconfont/material-icons.css';
+import Auth from './components/Body/Auth.jsx'
 
 import {
   createBrowserRouter,
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: "/home",
         element: <Landing />,
         default: true
+      },
+      {
+        path: "/auth",
+        element: <Auth />,
       },
       // {
       //   path: "/signup",

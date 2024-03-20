@@ -34,30 +34,14 @@
     /* -------------------------- */
     /* BODY */
     /* -------------------------- */
-    .body_container {
-        position: relative;
-        background-color: #DCDDE4;
-        height: 100%;
-        width: 100%;
-        padding: 20px 0;
-    }
-
-    .body_container > img {
-        left: 25%;
-        height: 80%;
-    }
     
-    .body_container_data {
-        position: absolute;
-        right: 10%;
-        top: 50%;
-        transform: translate(0, -50%);
-        margin-top: initial;
-        width: 300px;
-    }
+    /* -------------------------- */
+    /* BODY */
+    /*      LANDING */
+    /* -------------------------- */
 
-    .body_container_data > h3 {
-        font-size: 32px;
+    .landingContainer__img{
+        height: 65%;
     }
 
     /* -------------------------- */

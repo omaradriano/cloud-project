@@ -17,6 +17,32 @@
 
     /* -------------------------- */
     /* BODY */
+    /*      LANDING */
+    /* -------------------------- */
+
+    .landingContainer {
+        display: grid;
+        grid:
+          ". . . . . . ." 150px
+          ". landingContainer__img landingContainer__img landingContainer__jumbotron landingContainer__jumbotron landingContainer__jumbotron ." 1fr
+          ". landingContainer__img landingContainer__img landingContainer__jumbotron landingContainer__jumbotron landingContainer__jumbotron ." 150px
+          ". landingContainer__img landingContainer__img . . . ." 150px
+          / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 8px;
+      }
+      
+    .landingContainer__img {
+        grid-area: landingContainer__img;
+        height: 100%;
+    }   
+    .landingContainer__jumbotron { 
+        position: relative;
+        left: 75px;
+        grid-area: landingContainer__jumbotron; 
+    }
+
+    /* -------------------------- */
+    /* BODY */
     /*      SELECTFILE */
     /* -------------------------- */
 

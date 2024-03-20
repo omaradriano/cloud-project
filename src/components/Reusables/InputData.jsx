@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Icon from './../Icon';
 
 /**
@@ -28,7 +27,7 @@ const InputData = ({ name, inputType = 'text', labelContent = 'Label de prueba',
         const input = event.target;
         input.value = input.value.replace(/[eE]/g, '');
     }
-    
+
     return (
         <>
             {/* <div className={`inputData ${(focus && popover) ? 'activeInput' : ''}`}> */}
