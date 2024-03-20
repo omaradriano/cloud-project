@@ -1,4 +1,4 @@
-@media (min-width:992px){
+@media (min-width:992px) {
     /* -------------------------- */
     /* ROOT */
     /* -------------------------- */
@@ -14,6 +14,55 @@
     /* -------------------------- */
     /* BODY */
     /* -------------------------- */
+
+    /* -------------------------- */
+    /* BODY */
+    /*      LANDING */
+    /* -------------------------- */
+
+    .landingContainer {
+        display: grid;
+        grid:
+          ". . . . . . ." 150px
+          ". landingContainer__img landingContainer__img landingContainer__jumbotron landingContainer__jumbotron landingContainer__jumbotron ." 1fr
+          ". landingContainer__img landingContainer__img landingContainer__jumbotron landingContainer__jumbotron landingContainer__jumbotron ." 150px
+          ". landingContainer__img landingContainer__img . . . ." 150px
+          / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 8px;
+      }
+      
+    .landingContainer__img {
+        grid-area: landingContainer__img;
+        height: 100%;
+    }   
+    .landingContainer__jumbotron { 
+        position: relative;
+        left: 75px;
+        grid-area: landingContainer__jumbotron; 
+    }
+
+    /* -------------------------- */
+    /* BODY */
+    /*      SELECTFILE */
+    /* -------------------------- */
+
+    .selectFile {
+        padding: 215px 10px 10px 10px;
+        flex-direction: column;
+        align-items: center;
+        width: 45%;
+        min-width: 420px;
+        max-width: 500px;
+    }
+
+    .imgFileContainer {
+        position: absolute;
+        right: 15%;
+        top: 50%;
+        transform: translate(0, -50%);
+        aspect-ratio: 0.7727;
+        max-width: 380px;
+    }
 
     /* -------------------------- */
     /* FOOTER */
