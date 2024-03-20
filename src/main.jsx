@@ -11,13 +11,13 @@ import './styles/media-1200.css'
 
 // Router components
 import Landing from './components/Body/Landing.jsx'
-import SignUp from './components/Body/SignUp.jsx'
-import SignIn from './components/Body/SignIn.jsx'
-import Profile from './components/Body/Profile.jsx'
+// import SignUp from './components/Body/SignUp.jsx'
+// import SignIn from './components/Body/SignIn.jsx'
+// import Profile from './components/Body/Profile.jsx'
 import SelectFile from './components/Body/SelectFile.jsx'
+import Auth from './components/Body/Auth.jsx'
 
 import 'material-icons/iconfont/material-icons.css';
-import Auth from './components/Body/Auth.jsx'
 
 import {
   createBrowserRouter,
