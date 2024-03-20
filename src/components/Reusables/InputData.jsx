@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Icon from './../Icon';
 
 /**
@@ -23,30 +22,26 @@ const InputData = ({ name, inputType = 'text', labelContent = 'Label de prueba',
             event.preventDefault();
         }
     };
-    // Elimina los valores euler (o sea la letra 'e')
+    // Elimina los valores euler (o sea la letra 'e') //De momento hay un error aqui por que en ninguno de los campos se puede usar la "e"
     function deleteEulerLetter(event) {
         const input = event.target;
         input.value = input.value.replace(/[eE]/g, '');
     }
 
-    // const [focus, setFocus] = useState(false)
-    // const [popover, setPopover] = useState(false)
-
-    // function inFocus(e) {
-    //     setFocus(true)
-    //     console.log(e.target)
-    // }
-    // function outFocus(e) {
-    //     setFocus(false)
-    //     console.log('Se dejo de hacer el foco')
-    // } onBlur={outFocus} onFocus={inFocus}
     return (
         <>
             {/* <div className={`inputData ${(focus && popover) ? 'activeInput' : ''}`}> */}
             <div className={`inputData`}>
                 <label className="inputData__label" htmlFor={name}>{labelContent}</label>
                 <div className="inputData__validation">
-                    <input onInput={deleteEulerLetter} onChange={validationFunction} inputMode="none" onKeyDown={handleKeyDown} className="inputData__input" type={inputType} id={name} />
+                    {
+                        inputType === 'password' ? (
+                            <input onInput={deleteEulerLetter} onChange={validationFunction} inputMode="none" onKeyDown={handleKeyDown} className="inputData__input" type={inputType} id={name} />
+
+                        ) : (
+                            <input onChange={validationFunction} inputMode="none" onKeyDown={handleKeyDown} className="inputData__input" type={inputType} id={name} />
+                        )
+                    }
                     {validationFunction !== null ? (
                         <span className={`validationIcon ${isValidationCompleted ? 'validationOK' : 'validationERR'}`}>
                             <Icon icon={`${isValidationCompleted ? 'check_circle' : 'cancel'}`}></Icon>

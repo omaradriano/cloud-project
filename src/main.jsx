@@ -17,6 +17,7 @@ import Profile from './components/Body/Profile.jsx'
 import SelectFile from './components/Body/SelectFile.jsx'
 
 import 'material-icons/iconfont/material-icons.css';
+import Auth from './components/Body/Auth.jsx'
 
 import {
   createBrowserRouter,
@@ -38,17 +39,21 @@ const router = createBrowserRouter([
         default: true
       },
       {
-        path: "/signup",
-        element: <SignUp />
+        path: "/auth",
+        element: <Auth />,
       },
-      {
-        path: "/signin",
-        element: <SignIn />
-      },
-      {
-        path: "/profile/", //Aqui se debe de agregar el usuario loggeado de forma dinamica
-        element: <Profile />
-      },
+      // {
+      //   path: "/signup",
+      //   element: <SignUp />
+      // },
+      // {
+      //   path: "/signin",
+      //   element: <SignIn />
+      // },
+      // {
+      //   path: "/profile/", //Aqui se debe de agregar el usuario loggeado de forma dinamica
+      //   element: <Profile />
+      // },
       {
         path: "/selectFile",
         element: <SelectFile />
