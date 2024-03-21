@@ -29,6 +29,9 @@ const Nav = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    useEffect(()=>{
+        handleResize()
+    },[])
 
     return (
         <>
@@ -39,7 +42,8 @@ const Nav = () => {
                         {/* Estas opciones van a ser un Link de react router */}
                         <a href="#">Nosotros</a>
                         <a href="#">Mis documentos</a>
-                        <a href="#">Perfil</a>
+                        <Link to={`/auth`}>testuser</Link>
+                        {/* <a href="#">Perfil</a> */}
                         <a href="#">Feedback</a>
                         <a href="#">Panel</a>
                     </ul>
