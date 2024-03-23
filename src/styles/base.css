@@ -12,6 +12,10 @@
     --input-color: #e8e7ea;
     --bg-body-color: #DCDDE4;
     --button-confirm-color: #0E9F6E;
+    --success:var(--button-confirm-color);
+    --warning:var(--tec-yellow-color);
+    --danger:var(--tec-red-color);
+
 }
 
 .mainTitle {
@@ -57,6 +61,18 @@ input[type="button"]:active{
 }
 .font-inter {
     font-family: "Inter", sans-serif;
+}
+.warning{
+    color: var(--warning);
+}
+.success{
+    color: var(--success);
+}
+.danger{
+    color: var(--danger);
+}
+.disabled {
+    opacity: 0.5;
 }
 
 /* -------------------------- */
@@ -238,12 +254,13 @@ body {
     width: 100%;
     background-color: var(--bg-body-color);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .auth__form {
-    height: 450px;
+    height: auto;
     width: 90%;
     /* background-color: red; */
     max-width: 400px;
@@ -296,12 +313,13 @@ body {
 .auth__input {
     height: 38px;
     width: 280px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     border: none;
     border-radius: 5px;
     text-align: center;
     background-color: var(--bg-body-color);
     /* box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.2); */
+    transition: 0.5s ease-in;
 }
 
 .auth_confirm {
@@ -352,7 +370,56 @@ body {
     cursor: pointer;
 }
 
+.auth__inputContainer{
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.auth__inputContainer > ul {
+    position: relative;
+    align-self: flex-start;
+}
+
+.auth__inputContainer > ul > li{
+    color: red;
+}
+
+.validationList__item {
+    /* background-color: red; */
+    transform: translate(10px, 0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 3px 0;
+    align-self: flex-start;
+}
+
+.validationList__item > span {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.validationList__item > p{
+    font-size: 14px;
+    color: rgb(104, 104, 104);
+}
+
+.icon--authPosition {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: -28px;
+}
+
+.auth__input--ok {
+    color: green;
+}
+.auth__input--oknt {
+    color: red;
+}
 
 /* -------------------------- */
 /* BODY */

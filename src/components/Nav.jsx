@@ -17,14 +17,12 @@ const Nav = () => {
         setModalVisible(false)
     }
 
-    // Esto maneja el mostrar un burguer button o las opciones
+    // Esto maneja el mostrar un burguer button o las opciones en base al width de la pantalla
     function handleResize() {
-        console.log('Redimension');
         window.innerWidth >= 768 ? setMinwidth(true) : setMinwidth(false)
     }
     useEffect(() => {
         window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('resize', handleResize);
         };
