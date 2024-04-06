@@ -228,7 +228,7 @@ body {
 }
 
 .btn > span {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .btn_captureData {
@@ -426,7 +426,8 @@ body {
 /*      SELECTFILE */
 /* -------------------------- */
 
-.selectFile {
+.createfile {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -438,11 +439,17 @@ body {
     padding: 20px 10px 10px 10px;
 }
 
-.selectFile > h3 {
+.selectfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectfile > h3 {
     margin-bottom: 20px;
 }
 
-.selectFile > select {
+.selectfile > select {
     width: clamp(300px, 80%, 420px);
     margin-bottom: 35px;
     font-size: 18px;
@@ -452,25 +459,74 @@ body {
     min-height: 40px;
     text-align: center;
     background-color: rgb(218, 218, 218);
+    padding: 0 10px;
 }
 
 .selectFile > select:focus {
     background-color: rgb(234, 234, 255);
 }
 
-.imgFileContainer {
-    aspect-ratio: 0.7727;
-    margin-bottom: 35px;
-    /* height: 100%; */
-    width: 100%;
-    max-width: 300px;
-    /* background-color: red; */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--tec-blue-color);
+    width: 95%;
+    height: 380px;
+    max-width: 350px;
+    border-radius: 8px;
+    padding: 15px 40px;
 }
 
-.imgFileContainer > img {
-    height: 100%;
-    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+.card__help {
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+    top: 6px;
 }
+
+.card__title {
+    font-size: 22px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.card__description {
+    text-align: start;
+}
+
+.card__owner {
+    position: absolute;
+    bottom: 15px;
+    /* background-color: red; */
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    padding: 8px;
+}
+
+.card__owner > span {
+    margin-right: 10px;
+}
+
+.btn__tofilldoc {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    background-color: var(--tec-yellow-color);
+}
+
+.btn__toselectdoc {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    background-color: var(--tec-yellow-color);
+}
+
 
 /* -------------------------- */
 /* BODY */

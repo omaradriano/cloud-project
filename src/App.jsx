@@ -1,6 +1,6 @@
-import Header from './components/Header';
-import Nav from './components/Nav';
-import Body from './components/Body';
+import Header from './Header/Header';
+import Nav from './Navbar/Nav';
+import Body from './Body/Body';
 import { useState } from 'react';
 
 function App() {

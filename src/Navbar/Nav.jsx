@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import AuthHover from './AuthHover';
-import Icon from './Icon';
+import Icon from '../UtilComponents/Icon';
 import { Link } from 'react-router-dom';
-import Modal from './Reusables/Modal';
 
 const Nav = () => {
 
@@ -48,7 +46,6 @@ const Nav = () => {
                 ) : (
                     <Icon icon={"menu"} customIconClassName='pointer' action={handleModalToggle} />
                 )}
-                <Modal visible={modalVisible} component={<AuthHover unmount={closeModal} visible={modalVisible} />} />
             </div>
         </>
     )

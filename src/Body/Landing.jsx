@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import Icon from '../Icon'
-import monadocumentos from '../../assets/monadocumento.png'
+import Icon from '../UtilComponents/Icon'
+import monadocumentos from '../assets/monadocumento.png'
 
 const Landing = () => {
     return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import googleauthicon from '../../assets/icons/google-icon.png'
-import outlookauthicon from '../../assets/icons/outlook-icon.png'
-import Icon from '../Icon';
+import googleauthicon from '../assets/icons/google-icon.png'
+import outlookauthicon from '../assets/icons/outlook-icon.png'
+import Icon from '../UtilComponents/Icon'
 
 const Auth = () => {
     // state que maneja la opcion de autenticacion (signin y signup)

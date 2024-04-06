@@ -19,9 +19,6 @@
     /* HEADER */
     /* -------------------------- */
 
-    .header {
-        /* justify-content: flex-end; */
-    }
     .header > img:nth-child(n){
         margin-right: 10px;
         max-height: 80px;

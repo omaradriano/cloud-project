@@ -1,12 +1,11 @@
-import Icon from './../Icon';
+import Icon from './Icon';
 
 /**
  * Este componente se usa para validación de datos en formularios
  * @component
  * @param {string} name - Nombre que se le da al atributo htmlFor del label y al id del input
- * @param {string} input - Tipo de dato que se va a manejar en el input
+ * @param {string} inputType - Tipo de dato que se va a manejar en el input
  * @param {string} labelContent - Texto que se va a mostrar en el label
- * @param {boolean} hasPopover - Popover que se va a mostrar para dar instrucciones de llenado del input
  * 
  * Datos de la validación
  * @param {function} validationFunction - Función (aún no se si callback) para generar la validacion 
