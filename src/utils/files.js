@@ -24,96 +24,12 @@ export const careers = {
     "career_9": "Licenciatura en relaciones industriales",
 }
 
-function validatetel(){
-
-}
-
-// Este documento contiene informacion que se reusa en los select dentro de formularios
-const generalInfo = [
-    {
-        name: 'name',
-        type: 'text'
-    },
-    {
-        name: 'n_control',
-        type: 'number'
-    },
-    {
-        name: 'address',
-        type: 'text'
-    },
-    {
-        name: 'tel',
-        type: 'number',
-    },
-    {
-        name: 'career',
-        type: 'text',
-        options: careers
-    },
-]
 
 export const SS_files = {
     "file_1": {
         name: 'Formato de Autoevaluación Cualitativa',
         filename: autoevaluacion_cualitativa,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officia rerum consequatur! Magni, nam? Totam laboriosam amet aliquid, dicta eveniet consectetur quia. Voluptatum sapiente architecto at perspiciatis, ducimus necessitatibus aut?',
-        fields: [
-            ...generalInfo,
-            {
-                name: 'sem',
-                type: 'number'
-            },
-            {
-                name: 'dependency_name',
-                type: 'text'
-            },
-            {
-                name: 'dependency_address',
-                type: 'text'
-            },
-            {
-                name: 'responsable',
-                type: 'text'
-            },
-            {
-                name: 's_d',
-                type: 'number'
-            },
-            {
-                name: 'e_d',
-                type: 'number'
-            },
-            {
-                name: 'a_d',
-                type: 'number'
-            },
-            {
-                name: 's_m',
-                type: 'number'
-            },
-            {
-                name: 'e_m',
-                type: 'number'
-            },
-            {
-                name: 'a_m',
-                type: 'number'
-            },
-            {
-                name: 's_y',
-                type: 'number'
-            },
-            {
-                name: 'e_y',
-                type: 'number'
-            },
-            {
-                name: 'a_y',
-                type: 'number'
-            },
-
-        ]
     },
     "file_2": {
         name: 'Formato de Evaluación Cualitativa llenado por la Institución',

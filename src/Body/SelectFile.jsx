@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SS_files } from '../utils/files'
 import Icon from '../UtilComponents/Icon';
-import InputData from '../UtilComponents/InputData';
+import CartaCompromiso from '../Files/CartaCompromiso';
 
 const fileKeys = Object.keys(SS_files);
 
@@ -21,7 +21,7 @@ const SelectFile = () => {
         <div className="createfile">
             {filemode === 'selectfile' ? (
                 <div className="selectfile">
-                    <h3>Selecciona tu archivo</h3>
+                    <h3>Selecciona tu documento</h3>
                     <select defaultValue={file} name="file" id="file" onChange={handleSelectChange}>
                         {fileKeys.map((_elem, index) => {
                             return <option
@@ -53,17 +53,13 @@ const SelectFile = () => {
             ):(
                 <div className="fillfile">
                     <h3>Llenar tu documento</h3>
-                    {SS_files[file].fields.map((elem, index)=>{
-                        return (
-                            <div key={index} className="newinput">
-                                <label htmlFor={elem.name}>{elem.name}</label>
-                                <input type={elem.type} placeholder={elem.name}/>
-                            </div>
-                        )
-                    })}
+
+                    {/* Aqui se renderizan los diferentes formularios */}
+                    <CartaCompromiso></CartaCompromiso>
+                    
                     <span onClick={()=>setFileMode('selectfile')} className='btn btn__toselectdoc'>
                         <Icon icon={'arrow_left'}></Icon>
-                        <p>Seleccionar documento</p>
+                        {/* <p>Seleccionar documento</p> */}
                     </span>
                 </div>
             )}

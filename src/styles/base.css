@@ -34,7 +34,7 @@
 input[type="button"], input[type='text'], input[type='password'] {
     /* box shadow button */
     text-align: center;
-    box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2); */
 
 }
 input[type="button"]:active{
@@ -197,10 +197,12 @@ body {
 .landingContainer {
     position: relative;
     background-color: var(--bg-body-color);
-    display: flex;flex-direction: column;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
+    
 }
 
 .landingContainer__jumbotron {
@@ -227,9 +229,9 @@ body {
     font-weight: 300;
 }
 
-.btn > span {
+/* .btn > span {
     margin-left: 10px;
-}
+} */
 
 .btn_captureData {
     margin-bottom: 15px;
@@ -243,6 +245,7 @@ body {
     position: absolute;
     bottom: 0;
     height: 55%;
+    max-height: 550px;
 }
 
 /* -------------------------- */
@@ -387,6 +390,12 @@ body {
     color: red;
 }
 
+.auth__inputContainer > .inputData__input {
+    width: 280px;
+    height: 38px;
+    min-height: 38px;
+}
+
 .validationList__item {
     /* background-color: red; */
     transform: translate(10px, 0);
@@ -445,6 +454,18 @@ body {
     align-items: center;
 }
 
+.fillfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+.fillfile > h3 {
+    margin-bottom: 20px;
+}
+
 .selectfile > h3 {
     margin-bottom: 20px;
 }
@@ -462,9 +483,6 @@ body {
     padding: 0 10px;
 }
 
-.selectFile > select:focus {
-    background-color: rgb(234, 234, 255);
-}
 
 .card {
     position: relative;
@@ -522,8 +540,9 @@ body {
 
 .btn__toselectdoc {
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     left: 10px;
+    /* border-radius: 50%; */
     background-color: var(--tec-yellow-color);
 }
 
@@ -702,4 +721,87 @@ input[type='number'] {
   -moz-appearance: textfield;
   appearance: none;
 }
+
+/* -------------------------- */
+/* ESTILOS DE LOS FORMULARIOS PARA LOS DOCUMENTOS */
+/* -------------------------- */
+
+.inputData__input {
+    margin-bottom: 3px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    background-color: var(--bg-body-color);
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.5s ease-in;
+    font-size: 14px;
+}
+
+.formData {
+    /* background-color: red; */
+    position: relative;
+    width: clamp(320px, 80%, 400px);
+    /* width: 360px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    /* overflow-y: auto; */
+    padding-bottom: 10px;
+    min-height: 550px;
+    /* max-height: 70vh; */
+}
+
+.formData__group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.formData__block {
+    width: 100%;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* align-content: center; */
+    padding: 10px;
+}
+
+.formData__label {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 4px;
+}
+
+.formData__input, .formData__select, .formData__date > select {
+    height: 32px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    border: 0.3px solid black;
+    width: 100%;
+}
+ 
+.formData__date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.formData__group--date {
+    justify-content: space-evenly;
+}
+
+.btn_download {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    background-color: var(--button-confirm-color);
+}
+
+
 

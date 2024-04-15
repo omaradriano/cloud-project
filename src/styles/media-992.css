@@ -55,6 +55,20 @@
         max-width: 500px;
     }
 
+    .formData {
+        overflow-y: initial;
+        flex-wrap: wrap;
+        align-content: space-evenly;
+        width: 100%;
+        max-width: 1100px;
+        max-height: 70vh;
+    }
+
+    .formData > ul, .formData > div {
+        width: 45%;
+        max-width: 500px;
+    }
+
     .imgFileContainer {
         position: absolute;
         right: 15%;

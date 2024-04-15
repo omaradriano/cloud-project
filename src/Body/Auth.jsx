@@ -150,7 +150,7 @@ const Auth = () => {
                         <input onClick={toggleAuthMode} className={`btn ${authMode === 'signin' ? 'auth__mode--active' : ''}`} type="button" value="SignIn" />
                     </div>
                     <div className="auth__inputContainer">
-                        <input value={formValues.email} onChange={handleChange} name='email' className={`auth__input`} type="text" placeholder="Escribe tu correo" />
+                        <input value={formValues.email} onChange={handleChange} name='email' className={`inputData__input`} type="text" placeholder="Escribe tu correo" />
                         <ul className='validationList'>
                             {(validations.email === false && formValues.email.length !== 0) ? (
                                 <div className="validationList__item">
@@ -161,7 +161,7 @@ const Auth = () => {
                         </ul>
                     </div>
                     <div className="auth__inputContainer">
-                        <input value={formValues.password} onChange={handleChange} name='password' className='auth__input' type="password" placeholder="Contrasena" />
+                        <input value={formValues.password} onChange={handleChange} name='password' className='inputData__input' type="password" placeholder="Contrasena" />
                         <ul className='validationList'>
                             {(!validations.password_minlength && formValues.password.length !== 0) ? (
                                 <div className="validationList__item">
@@ -201,7 +201,7 @@ const Auth = () => {
                     </div>
                     {authMode === 'signup' ? (
                         <div className="auth__inputContainer">
-                            <input value={formValues.repeatpassword} onChange={handleChange} name='repeatpassword' className='auth__input' type="password" placeholder="Repite contrasena" />
+                            <input value={formValues.repeatpassword} onChange={handleChange} name='repeatpassword' className='inputData__input' type="password" placeholder="Repite contrasena" />
                             <ul className='validationlist'>
                                 {formValues.password !== formValues.repeatpassword ? (
                                     <div className="validationList__item">

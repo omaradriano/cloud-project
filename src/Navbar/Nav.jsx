@@ -38,7 +38,7 @@ const Nav = () => {
                         {/* Estas opciones van a ser un Link de react router */}
                         <a href="#">Nosotros</a>
                         <a href="#">Mis documentos</a>
-                        <Link to={`/auth`}>testuser</Link>
+                        <Link to={`/auth`}>Iniciar Sesion</Link>
                         {/* <a href="#">Perfil</a> */}
                         <a href="#">Feedback</a>
                         <a href="#">Panel</a>
