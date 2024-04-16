@@ -71,7 +71,7 @@ const SignIn = () => {
       scopes: ['openid', 'profile', 'User.Read']
     };
 
-    msalInstance.loginPopup(loginRequest)
+    msalInstance.loginRedirect(loginRequest)
       .then(() => {
         getUserInfo();
       })
@@ -90,7 +90,7 @@ const SignIn = () => {
     <>
       <h1>Inicio de sesion</h1>
       <button onClick={login} className='btn'>Iniciar sesion con Outlook</button>
-      
+      <button onClick={logout} className='btn'>Cerrar sesion</button>
       {userInfo && (
 
 
@@ -119,7 +119,7 @@ const SignIn = () => {
     
   </tbody>
 </table>
-<button onClick={logout} className='btn'>Cerrar sesion</button>
+
 </div>
       )}
     </>
