@@ -2,6 +2,19 @@ import { WidthContext } from "../Context/Context"
 import GeneralForm from "../Files/GeneralForm"
 import { useContext } from "react"
 import Icon from "../UtilComponents/Icon"
+import { SS_files } from "../utils/files"
+
+//Plantillas de los campos restantes para el formulario de generacion
+import CartaCompromiso from "../Files/Templates/CartaCompromiso"
+import AutoevaluacionCualitativa from "../Files/Templates/AutoevaluacionCualitativa"
+import EvaluacionCualitativa from "../Files/Templates/EvaluacionCualitativa"
+import EvaluacionActividades from "../Files/Templates/EvaluacionActividades"
+import CartaAsignacion from "../Files/Templates/CartaAsignacion"
+import ReporteBimestral from "../Files/Templates/ReporteBimestral"
+import FormularioSolicitud from "../Files/Templates/FormularioSolicitud"
+import PlanTrabajo from "../Files/Templates/PlanTrabajo"
+
+const fileKeys = Object.keys(SS_files)
 
 const Files = () => {
 
@@ -27,109 +40,53 @@ const Files = () => {
                 {/* <h3>Documentos</h3> */}
 
                 <div className="accordion accordion-flush" id="documents">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#carta_compromiso" aria-expanded="true" aria-controls="carta_compromiso">
-                                Carta compromiso
-                            </button>
-                        </h2>
-                        <div id="carta_compromiso" className="accordion-collapse collapse show" data-bs-parent="#documents">
-                            <div className="accordion-body">
 
+                    {fileKeys.map((elem, index) => {
+                        let name = SS_files[elem].name.split(' ').join("")
+                        let renderedComponent = null
+                        let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                        switch (componentName) {
+                            case 'formatodeautoevaluacioncualitativa':
+                                renderedComponent = <AutoevaluacionCualitativa></AutoevaluacionCualitativa>
+                                break
+                            case 'formatodeevaluacioncualitativallenadoporlainstitucion':
+                                renderedComponent = <EvaluacionCualitativa></EvaluacionCualitativa>
+                                break
+                            case 'formulariodecartacompromiso':
+                                renderedComponent = <CartaCompromiso></CartaCompromiso>
+                                break
+                            case 'formatodeevaluaciondelasactividadesporelprestadordeserviciosocial':
+                                renderedComponent = <EvaluacionActividades></EvaluacionActividades>
+                                break
+                            case 'formulariodecartadeasignacion':
+                                renderedComponent = <CartaAsignacion></CartaAsignacion>
+                                break
+                            case 'formatodereportebimestral':
+                                renderedComponent = <ReporteBimestral></ReporteBimestral>
+                                break
+                            case 'formulariodesolicitud':
+                                renderedComponent = <FormularioSolicitud></FormularioSolicitud>
+                                break
+                            case 'formulariodeplandetrabajo':
+                                renderedComponent = <PlanTrabajo></PlanTrabajo>
+                                break
+
+                        }
+                        return (
+                            <div key={index} className="accordion-item">
+                                <h2 className="accordion-header">
+                                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={`#${name}`} aria-expanded="true" aria-controls={`${name}`}>
+                                        {SS_files[elem].name}
+                                    </button>
+                                </h2>
+                                <div id={`${name}`} className={`accordion-collapse collapse ${index === 0 ? 'show' : ''}`} data-bs-parent="#documents">
+                                    <div className="accordion-body">
+                                        {renderedComponent}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#formulario_solicitud" aria-expanded="true" aria-controls="formulario_solicitud">
-                                Formulario de solicitud
-                            </button>
-                        </h2>
-                        <div id="formulario_solicitud" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#carta_asignacion" aria-expanded="true" aria-controls="carta_asignacion">
-                                Carta de asignacion
-                            </button>
-                        </h2>
-                        <div id="carta_asignacion" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#plan_trabajo" aria-expanded="true" aria-controls="plan_trabajo">
-                                Plan de trabajo
-                            </button>
-                        </h2>
-                        <div id="plan_trabajo" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#autoevaluacion_cualitativa" aria-expanded="true" aria-controls="autoevaluacion_cualitativa">
-                                Autoevaluacion cualitativa
-                            </button>
-                        </h2>
-                        <div id="autoevaluacion_cualitativa" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluacion_actividades" aria-expanded="true" aria-controls="evaluacion_actividades">
-                                Evaluacion de las actividades
-                            </button>
-                        </h2>
-                        <div id="evaluacion_actividades" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#evaluacion_cualitativa" aria-expanded="true" aria-controls="evaluacion_cualitativa">
-                                Evaluacion cualitativa
-                            </button>
-                        </h2>
-                        <div id="evaluacion_cualitativa" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="accordion-item">
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#reporte_bimestral" aria-expanded="true" aria-controls="reporte_bimestral">
-                                Reporte Bimestral
-                            </button>
-                        </h2>
-                        <div id="reporte_bimestral" className="accordion-collapse collapse" data-bs-parent="#documents">
-                            <div className="accordion-body">
-
-                            </div>
-                        </div>
-                    </div>
+                        )
+                    })}
                 </div>
             </div>
         </>
