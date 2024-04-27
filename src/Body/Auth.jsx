@@ -202,7 +202,7 @@ const Auth = () => {
                     {authMode === 'signup' ? (
                         <div className="auth__inputContainer">
                             <input value={formValues.repeatpassword} onChange={handleChange} name='repeatpassword' className='inputData__input' type="password" placeholder="Repite contrasena" />
-                            <ul className='validationlist'>
+                            <ul className='validationList'>
                                 {formValues.password !== formValues.repeatpassword ? (
                                     <div className="validationList__item">
                                         <Icon icon={'cancel'} customIconClassName='danger'></Icon>

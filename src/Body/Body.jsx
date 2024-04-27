@@ -19,7 +19,7 @@ const Body = () => {
                 {/**
                  * Recordar que Outlet sirve para renderizar dentro los componentes que se manejen por react router   
                  */}
-                <Outlet />
+                <Outlet/>
             </div>
         </>
     )
