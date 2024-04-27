@@ -12,9 +12,9 @@
     --input-color: #e8e7ea;
     --bg-body-color: #DCDDE4;
     --button-confirm-color: #0E9F6E;
-    --success:var(--button-confirm-color);
-    --warning:var(--tec-yellow-color);
-    --danger:var(--tec-red-color);
+    --success: var(--button-confirm-color);
+    --warning: var(--tec-yellow-color);
+    --danger: var(--tec-red-color);
 
 }
 
@@ -31,46 +31,58 @@
 /* -------------------------- */
 
 /* Centrar el texto de todos los botones */
-input[type="button"], input[type='text'], input[type='password'] {
+input[type="button"],
+input[type='text'],
+input[type='password'] {
     /* box shadow button */
     text-align: center;
     /* box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2); */
 
 }
-input[type="button"]:active{
+
+input[type="button"]:active {
     box-shadow: initial;
 }
 
 /* -------------------------- */
 /* Classes */
 /* -------------------------- */
-.text-light{
+.text-light {
     color: #fff;
 }
-.text-dark{
+
+.text-dark {
     color: black;
 }
+
 .pointer {
     cursor: pointer;
 }
-.visible{
+
+.visible {
     opacity: 1;
 }
-.invisible{
+
+.invisible {
     opacity: 0;
 }
+
 .font-inter {
     font-family: "Inter", sans-serif;
 }
-.warning{
+
+.warning {
     color: var(--warning);
 }
-.success{
+
+.success {
     color: var(--success);
 }
-.danger{
+
+.danger {
     color: var(--danger);
 }
+
 .disabled {
     opacity: 0.5;
 }
@@ -84,13 +96,13 @@ input[type="button"]:active{
     right: 0;
 }
 
-.btn{
+.btn {
     text-decoration: none;
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 32px;
+    height: auto;
     border: none;
     border-radius: 5px;
     padding: 8px 14px;
@@ -114,11 +126,9 @@ body {
 
     display: grid;
     grid:
-        "header" 60px 
-        "nav" 70px 
-        "body" auto 
-        / 1fr ;
+        "header" 60px "nav" 70px "body" auto / 1fr;
 }
+
 /* -------------------------- */
 /* HEADER */
 /* -------------------------- */
@@ -135,7 +145,7 @@ body {
     flex-wrap: nowrap;
 }
 
-.header > img:nth-child(n){
+.header>img:nth-child(n) {
     margin-right: 10px;
     max-height: 40px;
 }
@@ -158,21 +168,23 @@ body {
 .nav__options {
     display: flex;
     flex-direction: row;
-    list-style: none
+    list-style: none;
+    margin-bottom: 0;
 }
-.nav__options > a {
+
+.nav__options>a {
     color: white;
     margin-left: 15px;
     cursor: pointer;
     text-decoration: none;
 }
 
-.nav > h2 {
+.nav>h2 {
     font-size: 22px;
     color: #fff;
 }
 
-.nav > span {
+.nav>span {
     font-size: 50px;
     color: white;
 }
@@ -202,7 +214,7 @@ body {
     align-items: center;
     width: 100%;
     height: 100%;
-    
+
 }
 
 .landingContainer__jumbotron {
@@ -235,13 +247,13 @@ body {
 
 .btn_captureData {
     margin-bottom: 15px;
-    box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);         
+    box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2);
     font-size: 14px;
     font-weight: 500;
     background-color: var(--tec-yellow-color);
-} 
+}
 
-.landingContainer__img{
+.landingContainer__img {
     position: absolute;
     bottom: 0;
     height: 55%;
@@ -287,10 +299,10 @@ body {
 }
 
 .auth__mode--active {
-    background-color: var(--tec-yellow-color);
+    background-color: var(--tec-yellow-color) !important ;
 }
 
-.auth__mode > input[type='button'] {
+.auth__mode>input[type='button'] {
     width: 50%;
     height: 100%;
     display: flex;
@@ -301,7 +313,7 @@ body {
     /* box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.2); */
 }
 
-.auth__mode > input[type='button']:last-child {
+.auth__mode>input[type='button']:last-child {
     margin-left: 5px;
 }
 
@@ -309,7 +321,7 @@ body {
     height: 80px;
 }
 
-.auth__options > img {
+.auth__options>img {
     height: 90%;
 }
 
@@ -328,7 +340,7 @@ body {
 .auth_confirm {
     margin: 20px 0;
     width: 280px;
-    background-color: var(--button-confirm-color);
+    background-color: var(--button-confirm-color) !important;
     /* text-align: center; */
     display: flex;
     flex-direction: row;
@@ -353,7 +365,7 @@ body {
     background-color: black;
 }
 
-.auth__divider > p {
+.auth__divider>p {
     display: inline-block;
     margin: 0 10px;
     /* width: 120px; */
@@ -369,31 +381,43 @@ body {
     justify-content: space-around;
     /* background-color: red; */
 }
-.auth__options > img {
+
+.auth__options>img {
     cursor: pointer;
 }
 
-.auth__inputContainer{
+.auth__inputContainer {
     position: relative;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* height: 40px; */
 }
 
-.auth__inputContainer > ul {
+.auth__inputContainer>ul {
     position: relative;
     align-self: flex-start;
 }
 
-.auth__inputContainer > ul > li{
+.auth__inputContainer>ul>li {
     color: red;
 }
 
-.auth__inputContainer > .inputData__input {
+.auth__inputContainer>.inputData__input {
     width: 280px;
     height: 38px;
     min-height: 38px;
+}
+
+.validationList {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 5px; */
+    padding-left: 5px;
+    margin-bottom: 0;
 }
 
 .validationList__item {
@@ -406,14 +430,15 @@ body {
     align-self: flex-start;
 }
 
-.validationList__item > span {
+.validationList__item>span {
     margin-right: 10px;
     font-size: 16px;
 }
 
-.validationList__item > p{
+.validationList__item>p {
     font-size: 14px;
     color: rgb(104, 104, 104);
+    margin-bottom: 0;
 }
 
 .icon--authPosition {
@@ -426,6 +451,7 @@ body {
 .auth__input--ok {
     color: green;
 }
+
 .auth__input--oknt {
     color: red;
 }
@@ -462,15 +488,15 @@ body {
     height: auto;
 }
 
-.fillfile > h3 {
+.fillfile>h3 {
     margin-bottom: 20px;
 }
 
-.selectfile > h3 {
+.selectfile>h3 {
     margin-bottom: 20px;
 }
 
-.selectfile > select {
+.selectfile>select {
     width: clamp(300px, 80%, 420px);
     margin-bottom: 35px;
     font-size: 18px;
@@ -527,7 +553,7 @@ body {
     padding: 8px;
 }
 
-.card__owner > span {
+.card__owner>span {
     margin-right: 10px;
 }
 
@@ -558,7 +584,7 @@ body {
     align-items: center;
 }
 
-.signup > h3 {
+.signup>h3 {
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -578,7 +604,8 @@ body {
     font-weight: 500;
 }
 
-.inputData__input, .inputData__select {
+.inputData__input,
+.inputData__select {
     margin-bottom: 10px;
     width: 100%;
     text-align: center;
@@ -601,20 +628,23 @@ body {
     width: 100%;
 }
 
-.activeInput > input:focus {
+.activeInput>input:focus {
     border: 1px solid green;
 }
-.validationIcon{
+
+.validationIcon {
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
-.validationOK > span {
+.validationOK>span {
     color: green;
 }
-.validationERR > span {
+
+.validationERR>span {
     color: red;
 }
+
 /* -------------------------- */
 /* PROFILE HOVER */
 /* -------------------------- */
@@ -649,16 +679,19 @@ body {
     bottom: -270px;
     flex-direction: column;
 }
-.profileHover--preauth > div {
+
+.profileHover--preauth>div {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
-.profileHover--preauth > div > label {
+
+.profileHover--preauth>div>label {
     align-self: flex-start;
     margin-bottom: 10px;
 }
-.profileHover--preauth > div > input {
+
+.profileHover--preauth>div>input {
     margin: 0 10px;
     font-size: 16px;
     outline: none;
@@ -671,12 +704,12 @@ body {
     text-align: center;
 }
 
-.profileHover--preauth > input[type="button"] {
+.profileHover--preauth>input[type="button"] {
     align-self: center;
     margin-bottom: 10px;
 }
 
-.profileHover > a {
+.profileHover>a {
     height: 50%;
     min-height: 40px;
     /* margin: 2px; */
@@ -690,7 +723,7 @@ body {
     text-decoration: none;
 }
 
-.profileHover > a:nth-child(1){
+.profileHover>a:nth-child(1) {
     margin-bottom: 10px;
 }
 
@@ -698,13 +731,14 @@ body {
     display: flex;
     animation-name: fadeIn;
     animation-duration: 0.5s;
-    
-  }
+
+}
 
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -717,9 +751,9 @@ body {
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button,
 input[type='number'] {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
 }
 
 /* -------------------------- */
@@ -735,12 +769,13 @@ input[type='number'] {
     box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.5s ease-in;
     font-size: 14px;
+    /* height: 32px; */
 }
 
 .formData {
     /* background-color: red; */
     position: relative;
-    width: clamp(320px, 80%, 400px);
+    width: clamp(320px, 90%, 400px);
     /* width: 360px; */
     display: flex;
     flex-direction: column;
@@ -748,7 +783,8 @@ input[type='number'] {
     height: auto;
     /* overflow-y: auto; */
     padding-bottom: 10px;
-    min-height: 550px;
+    /* margin-bottom: 20px; */
+    /* min-height: 550px; */
     /* max-height: 70vh; */
 }
 
@@ -762,10 +798,15 @@ input[type='number'] {
     width: 100%;
     /* background-color: orange; */
     display: flex;
+    margin-top: 10px;
     flex-direction: column;
     align-items: flex-start;
     /* align-content: center; */
-    padding: 10px;
+    /* padding: 10px; */
+}
+
+.formData__group > .formData__block:first-child{
+    margin-right: 10px;
 }
 
 .formData__label {
@@ -774,7 +815,9 @@ input[type='number'] {
     margin-bottom: 4px;
 }
 
-.formData__input, .formData__select, .formData__date > select {
+.formData__input,
+.formData__select,
+.formData__date>select {
     height: 32px;
     font-size: 16px;
     text-align: center;
@@ -784,7 +827,7 @@ input[type='number'] {
     border: 0.3px solid black;
     width: 100%;
 }
- 
+
 .formData__date {
     display: flex;
     flex-direction: column;
@@ -804,4 +847,54 @@ input[type='number'] {
 }
 
 
+/* -------------------------- */
+/* VISTA DONDE VA EL FORMULARIO GENERAL Y LA GENERACION DE DOCUMENTOS */
+/* -------------------------- */
 
+.files {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-body-color);
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-top: 20px;
+}
+
+.accordion {
+    width: 95%;
+    max-width: 450px;
+    margin-bottom: 20px;
+    /* height: calc(100%-20px) !important; */
+}
+
+.accordion-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accordion-button.show {
+    background-color: rgb(134, 185, 247);
+}
+
+.files > h3 {
+    margin: 20px 0;
+}
+
+.accordion-button {
+    position: relative;
+}
+
+.accordion__button {
+    position: absolute;
+    right: 50px;
+}
+
+.btn__save{
+    background-color: var(--button-confirm-color);
+    /* margin: 20px 0; */
+    position: relative;
+    right: -35%;
+}

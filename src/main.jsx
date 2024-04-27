@@ -20,6 +20,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Files from './Body/Files.jsx'
 
 /**
  * Browser router donde se agregan las rutas, estas son renderizadas en el Outlet
@@ -40,8 +41,8 @@ const router = createBrowserRouter([
         element: <Auth />,
       },
       {
-        path: "/selectFile",
-        element: <SelectFile />
+        path: "/files",
+        element: <Files />
       }
     ]
   },
