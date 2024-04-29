@@ -31,7 +31,6 @@ export const SS_files = {
         name: 'Formato de Autoevaluación Cualitativa',
         filename: autoevaluacion_cualitativa,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officia rerum consequatur! Magni, nam? Totam laboriosam amet aliquid, dicta eveniet consectetur quia. Voluptatum sapiente architecto at perspiciatis, ducimus necessitatibus aut?',
-        component: CartaCompromiso
     },
     "file_2": {
         name: 'Formato de Evaluación Cualitativa llenado por la Institución',
