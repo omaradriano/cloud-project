@@ -3,6 +3,10 @@ import googleauthicon from '../assets/icons/google-icon.png'
 import outlookauthicon from '../assets/icons/outlook-icon.png'
 import Icon from '../UtilComponents/Icon'
 
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+const provider = new GoogleAuthProvider();
+import { auth } from '../firebaseAuth';
+
 const Auth = () => {
     // state que maneja la opcion de autenticacion (signin y signup)
     const [authMode, setAuthMode] = useState('signup')
@@ -12,7 +16,7 @@ const Auth = () => {
         password: '',
         repeatpassword: ''
     })
-    
+
     //manejo de validaciones
     const [validations, setValidations] = useState({
         email: null,
@@ -66,7 +70,7 @@ const Auth = () => {
             setSubmit(false);
         }
     }, [validations, formValues]);
-    
+
 
     function handleSubmit(evt) {
         evt.preventDefault()
@@ -212,7 +216,7 @@ const Auth = () => {
                             </ul>
                         </div>
                     ) : null}
-                    <input onClick={()=>console.log('Subiendo informacion')} disabled={!submit} className={`btn auth_confirm ${submit === false ? 'disabled' : null}`} type="button" value={`${authMode === 'signup' ? 'Sign Up' : 'Sign In'}`} />
+                    <input onClick={() => console.log('Subiendo informacion')} disabled={!submit} className={`btn auth_confirm ${submit === false ? 'disabled' : null}`} type="button" value={`${authMode === 'signup' ? 'Sign Up' : 'Sign In'}`} />
                 </div>
                 <div className="auth__divider">
                     <div className="line"></div>
@@ -220,7 +224,27 @@ const Auth = () => {
                     <div className="line"></div>
                 </div>
                 <div className="auth__options">
-                    <img src={googleauthicon} alt="Google auth icon" />
+                    <img src={googleauthicon} onClick={() => {
+                        signInWithPopup(auth, provider)
+                            .then((result) => {
+                                // This gives you a Google Access Token. You can use it to access the Google API.
+                                const credential = GoogleAuthProvider.credentialFromResult(result);
+                                const token = credential.accessToken;
+                                // The signed-in user info.
+                                const user = result.user;
+                                // IdP data available using getAdditionalUserInfo(result)
+                                // ...
+                            }).catch((error) => {
+                                // Handle Errors here.
+                                const errorCode = error.code;
+                                const errorMessage = error.message;
+                                // The email of the user's account used.
+                                const email = error.customData.email;
+                                // The AuthCredential type that was used.
+                                const credential = GoogleAuthProvider.credentialFromError(error);
+                                // ...
+                            });
+                    }} alt="Google auth icon" />
                     <img src={outlookauthicon} alt="Outlook auth icon" />
                 </div>
             </div>

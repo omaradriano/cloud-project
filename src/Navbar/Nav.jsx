@@ -1,13 +1,19 @@
-import { useEffect, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Icon from '../UtilComponents/Icon';
-import { Link } from 'react-router-dom';
-import { WidthContext } from '../Context/Context';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext, WidthContext } from '../Context/Context';
+
+import { signOut } from "firebase/auth";
+import { auth } from '../firebaseAuth';
 
 
 const Nav = () => {
+    const navigate = useNavigate();
 
     const [modalVisible, setModalVisible] = useState(false);
     const width = useContext(WidthContext)
+
+    const { authentication } = useContext(AuthContext)
 
     const handleModalToggle = () => {
         setModalVisible(!modalVisible);
@@ -25,10 +31,23 @@ const Nav = () => {
                     <ul className='nav__options'>
                         {/* Estas opciones van a ser un Link de react router */}
                         <a href="#">Nosotros</a>
-                        <a href="#">Mis documentos</a>
-                        <Link to={`/auth`}>Iniciar Sesion</Link>
+                        {/* <a href="#">Mis documentos</a> */}
+                        {!authentication ? (
+                            <Link to={`/auth`}>Iniciar Sesion</Link>
+                        ) : (
+                            <>
+                                <Link to={`/profile`}>Perfil</Link>
+                                <Link onClick={() => {
+                                    signOut(auth).then(() => {
+                                        navigate('/home')
+                                    }).catch((error) => {
+                                        // An error happened.
+                                    });
+                                }} >Logout</Link>
+                            </>
+                        )}
                         {/* <a href="#">Perfil</a> */}
-                        <a href="#">Feedback</a>
+                        <a href="#">Foro</a>
                         <a href="#">Panel</a>
                     </ul>
                 ) : (

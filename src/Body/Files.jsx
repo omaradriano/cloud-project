@@ -1,4 +1,4 @@
-import { WidthContext } from "../Context/Context"
+import { AuthContext } from "../Context/Context"
 import GeneralForm from "../Files/GeneralForm"
 import { useContext } from "react"
 import Icon from "../UtilComponents/Icon"
