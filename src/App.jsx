@@ -38,10 +38,6 @@ function App() {
     handleResize()
   }, [])
 
-  useEffect(()=>{
-    console.log('Datos del state',authentication);
-  },[authentication])
-
   return (
     <>
       <AuthContext.Provider value={{ authentication }}>

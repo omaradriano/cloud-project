@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import googleauthicon from '../assets/icons/google-icon.png'
 import outlookauthicon from '../assets/icons/outlook-icon.png'
 import Icon from '../UtilComponents/Icon'
+import { useNavigate } from 'react-router-dom'
 
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const provider = new GoogleAuthProvider();
@@ -16,6 +17,8 @@ const Auth = () => {
         password: '',
         repeatpassword: ''
     })
+
+    const navigate = useNavigate();
 
     //manejo de validaciones
     const [validations, setValidations] = useState({
@@ -232,8 +235,22 @@ const Auth = () => {
                                 const token = credential.accessToken;
                                 // The signed-in user info.
                                 const user = result.user;
-                                // IdP data available using getAdditionalUserInfo(result)
-                                // ...
+                                console.log('After signin ', user);
+                                const options = {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({ email: user.email })
+                                }
+                                fetch('http://localhost:5006/auth/register', options)
+                                    .then(res => {
+                                        return res.json()
+                                    })
+                                    .then(message => {
+                                        console.log(message.message, 'Este mensaje se queda para una notificacion')
+                                        navigate('/home')
+                                    })
                             }).catch((error) => {
                                 // Handle Errors here.
                                 const errorCode = error.code;
