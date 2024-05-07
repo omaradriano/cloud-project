@@ -24,7 +24,7 @@ const Input = ({label, name, type, value, handleChange = ()=>{}}) => {
                 <label className="formData__label" htmlFor={name}>{label}</label>
                 <input 
                     onChange={handleChange} 
-                    value={value} 
+                    value={value || ''} 
                     onKeyDown={type === 'number' ? handleKeyDown : ()=>{}} 
                     onInput={type === 'number' ? deleteEulerLetter : ()=>{}} 
                     className="formData__input" 

@@ -53,16 +53,17 @@
     }
 
     .formData {
-        overflow-y: initial;
-        align-content: space-evenly;
+        /* align-content: space-evenly; */
         /* width: 100%; */
         max-width: 1100px;
         max-height: 70vh;
-        overflow-y: auto;
+        /* overflow-y: unset; */
         /* padding: 20px;
         border: 1px solid black;
         border-radius: 10px;
         box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.4); */
+        /* width: 100%;  */
+        /* flex-wrap: nowrap;  */
     }
 
     /* .formData > ul, .formData > div {

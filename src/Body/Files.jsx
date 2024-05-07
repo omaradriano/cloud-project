@@ -21,7 +21,7 @@ const Files = () => {
     return (
         <>
             <div className="files">
-                <div className="accordion custom__accordion" id="general-form">
+                {/* <div className="accordion custom__accordion" id="general-form">
                     <div className="accordion-item">
                         <h2 className="accordion-header">
                             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -31,15 +31,15 @@ const Files = () => {
                         </h2>
                         <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#general-form">
                             <div className="accordion-body">
-                                <GeneralForm></GeneralForm>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                            </div>
+                        </div> */}
+                <GeneralForm></GeneralForm>
 
                 {/* <h3>Documentos</h3> */}
 
-                <div className="accordion accordion-flush" id="documents">
+                {/* <div className="accordion accordion-flush" id="documents">
 
                     {fileKeys.map((elem, index) => {
                         let name = SS_files[elem].name.split(' ').join("")
@@ -87,7 +87,7 @@ const Files = () => {
                             </div>
                         )
                     })}
-                </div>
+                </div> */}
             </div>
         </>
     )

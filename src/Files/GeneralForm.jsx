@@ -1,115 +1,137 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Input from "./Components/Input"
 import { careers } from "../utils/files"
 import Icon from "../UtilComponents/Icon";
 import { months } from "../utils/aux";
+import { AuthContext } from "../Context/Context";
 
 const CartaCompromiso = () => {
 
-    // Funciones para validar los campos input NUMBER
-    // Evita que se usen las flechas del teclado arriba y abajo
-    const handleKeyDown = (event) => {
-        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-            console.log(event.key);
-            event.preventDefault();
-        }
-    };
-
-    const careerarray = Object.keys(careers)
+    const { authentication } = useContext(AuthContext)
 
     const [values, setValues] = useState({
         name: '',
         n_control: '',
+        age: '',
         address: '',
         tel: '',
-        career: 'default',
-        sem: '1',
+        cel: '',
+        career: '',
+        sem: '',
         dependency_name: '',
         dependency_address: '',
-        responsable: '',
+        responsable_name: '',
+        responsable_role: '',
         s_d: '', //start day
-        e_d: '', //end day
-        a_d: '', //actual day
-        s_m: 'Enero', //start month
+        s_m: 'Enero', //end day
+        s_y: '', //actual day
+        e_d: '', //start month
         e_m: 'Enero', //end month
-        a_m: '', //actual month
-        s_y: '', //start year
-        e_y: '', //end year
-        a_y: ''  //actual year
+        e_y: '', //actual month
+        a_d: '', //start year
+        a_m: '', //end year
+        a_y: '',  //actual year
+        titular_name: '',
+        titular_role: '',
+        program_name: '',
+        inLocation: 'no',
+        location_name: '',
     })
 
     const [validations, setValidations] = useState({
-        //Los valores comentados no son necesarios para las validaciones pero de todos modos lo dejo xd
-        name: null,
-        n_control: null,
+        name: '',
+        n_control: '',
+        age: null,
         address: null,
         tel: null,
+        cel: null,
         career: null,
-        // sem: null,
+        sem: null,
         dependency_name: null,
         dependency_address: null,
-        responsable: null,
+        responsable_name: null,
+        responsable_role: null,
         s_d: null, //start day
-        e_d: null, //end day
-        // a_d: null, //actual day
-        // s_m: null, //start month
-        // e_m: null, //end month
-        // a_m: null, //actual month
-        s_y: null, //start year
-        e_y: null, //end year
-        // a_y: null  //actual year
+        s_m: null, //end day
+        s_y: null, //actual day
+        e_d: null, //start month
+        e_m: null, //end month
+        e_y: null, //actual month
+        a_d: null, //start year
+        a_m: null, //end year
+        a_y: null,  //actual year
+        titular_name: null,
+        titular_role: null,
+        program_name: null,
+        // inLocation: null,
+        location_name: null,
     })
 
-    const validationRules = {
-        name: 1,
-        n_control: 8,
-        address: 1,
-        tel: 10,
-        career: 'default',
-        dependency_name: 1,
-        dependency_address: 1,
-        responsable: 1,
-        s_d: 1,
-        e_d: 1,
-        s_y: 1,
-        e_y: 1
-    };
+    const [validationsCompleted, setValidationsCompleted] = useState(false)
 
-    function handleValidations() {
-        const updatedValidations = {};
-
-        for (const key in validationRules) {
-            const value = values[key];
-
-            if (value.length !== 0 && (value !== 'default' || key !== 'career')) {
-                updatedValidations[key] = true;
+    //Verifica los campos que estan vacíos para mostrar una alerta del campo vacío
+    function handleValidations(objectValidations) {
+        const keys = Object.keys(objectValidations)
+        keys.forEach((elem) => {
+            if (values[elem].length === 0) {
+                setValidations(prev => ({ ...prev, [elem]: false }))
             } else {
-                updatedValidations[key] = false;
+                setValidations(prev => ({ ...prev, [elem]: true }))
             }
-        }
-
-        setValidations(prev => ({ ...prev, ...updatedValidations }));
-
-        console.log('Se ha cambiado un valor en el formulario');
+        })
     }
+    //Esto se ejecuta cada vez que un valor en el formulario cambia
+    useEffect(() => {
+        handleValidations(values)
+    }, [values])
+    
+    //Para leer los valores de los formularios en tiempo real
+    useEffect(() => {
+        console.log(values);
+        console.log('Validations ', validations);
+        validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
+    }, [values, validations])
+
+
+    const careerarray = Object.keys(careers)
 
     // state que maneja el cambio de los valores en los input
     function handleChange(evt) {
         const { target } = evt
         const { name, value } = target
-
-        console.log(target);
-
-        setValues({
-            ...values,
-            [name]: value
-        })
+        setValues(prev => ({ ...prev, [name]: value }))
     }
-    useEffect(() => {
-        handleValidations()
-        console.log(values);
-        console.log(validations);
-    }, [values])
+
+    function submitData() {
+        if (values._id) delete values.id
+        delete values._id
+        if (authentication) {
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: authentication.email, ...values, name: values.name.split(' ').slice(2,).concat(values.name.split(' ').slice(0,2)) })
+            }
+            fetch('http://127.0.0.1:5006/data/updatetest', options)
+                .then(res => res.json())
+                .then(res => console.log(res))
+        } else {
+            console.log('No existe autenticacion, no se pueden enviar los datos');
+        }
+    }
+
+    function validateAll(validations_obj) {
+        let validate = true
+        for (const key in validations_obj) {
+            if (Object.hasOwnProperty.call(validations_obj, key)) {
+                if (validations[key] === false) {
+                    validate = false
+                }
+            }
+        }
+        return validate
+    }
 
     //Este useEffect solo se usa una vez para obtener la fecha actual
     useEffect(() => {
@@ -127,22 +149,35 @@ const CartaCompromiso = () => {
         })
     }, [])
 
+    useEffect(() => {
+        if (authentication) {
+            fetch(`http://localhost:5006/data/getUserData/${authentication.email}`)
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res);
+                    setValues({ ...res.userdata })
+                })
+        }
+    }, [authentication])
+
     return (
         <>
             <div className="formData">
+                <input type="button" value="Guardar" className={`btn btn__save`} onClick={() => submitData()} />
+                <input type="button" value="Llenar formularios" className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`}/>
                 {/*  ----------------- Validar nombre ----------------- */}
                 <Input
-                    value={values.nombre}
+                    value={values.name}
                     name={'name'}
                     label={'Nombre completo'}
                     type={'text'}
                     handleChange={handleChange}
                 ></Input>
                 <ul className='validationList'>
-                    {(validations.name === false && validations.name !== null) ? (
+                    {validations.name === false ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Campo obligatorio</p>
+                            <Icon icon={'warning'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
@@ -158,8 +193,8 @@ const CartaCompromiso = () => {
                 <ul className='validationList'>
                     {(validations.n_control === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Se necesitan almenos 8 carácteres</p>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
@@ -168,32 +203,66 @@ const CartaCompromiso = () => {
                 <Input
                     value={values.address}
                     name={'address'}
-                    label={'Direccion'}
+                    label={'Dirección'}
                     type={'text'}
                     handleChange={handleChange}>
                 </Input>
                 <ul className='validationList'>
                     {(validations.address === false) ? (
-                        <div className="validationList__item validationList__item--form">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Campo obligatorio</p>
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
 
-                {/*  ----------------- Validar telefono ----------------- */}
+                {/*  ----------------- Validar edad ----------------- */}
+                <Input
+                    value={values.age}
+                    name={'age'}
+                    label={'Edad'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.age === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar teléfono ----------------- */}
                 <Input
                     value={values.tel}
                     name={'tel'}
-                    label={'Numero de telefono'}
-                    type={'number'}
+                    label={'Teléfono de casa'}
+                    type={'text'}
                     handleChange={handleChange}>
                 </Input>
                 <ul className='validationList'>
                     {(validations.tel === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Se necesitan 10 caracteres</p>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar telefono celular ----------------- */}
+                <Input
+                    value={values.cel}
+                    name={'cel'}
+                    label={'Teléfono celular'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.cel === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
@@ -224,24 +293,24 @@ const CartaCompromiso = () => {
                 <ul className='validationList'>
                     {(validations.career === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Se debe especificar una carrera</p>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Existen campos vacíos</p>
                         </div>
                     ) : null}
                 </ul>
 
                 {/*  ----------------- Validar nombre de la dependencia ----------------- */}
                 <Input
-                    name={'dependency_name'}
                     value={values.dependency_name}
-                    type={'text'}
+                    name={'dependency_name'}
                     label={'Nombre de la dependencia'}
-                    handleChange={handleChange}
-                ></Input>
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
                 <ul className='validationList'>
                     {(validations.dependency_name === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
                             <p>Campo vacío</p>
                         </div>
                     ) : null}
@@ -249,102 +318,210 @@ const CartaCompromiso = () => {
 
                 {/*  ----------------- Validar direccion de la dependencia ----------------- */}
                 <Input
-                    name={'dependency_address'}
                     value={values.dependency_address}
+                    name={'dependency_address'}
+                    label={'Dirección de la dependencia'}
                     type={'text'}
-                    label={'Direccion de la dependencia'}
-                    handleChange={handleChange}
-                ></Input>
+                    handleChange={handleChange}>
+                </Input>
                 <ul className='validationList'>
                     {(validations.dependency_address === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
                             <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
 
-
-                {/*  ----------------- Validar responsable de la dependencia ----------------- */}
+                {/*  ----------------- Validar telefono celular ----------------- */}
                 <Input
-                    name={'responsable'}
-                    value={values.responsable}
+                    value={values.responsable_name}
+                    name={'responsable_name'}
+                    label={'Nombre del responsable de la dependencia'}
                     type={'text'}
-                    label={'Responsable de la dependencia'}
-                    handleChange={handleChange}
-                ></Input>
+                    handleChange={handleChange}>
+                </Input>
                 <ul className='validationList'>
-                    {(validations.responsable === false) ? (
+                    {(validations.responsable_name === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar rol del responsable ----------------- */}
+                <Input
+                    value={values.responsable_role}
+                    name={'responsable_role'}
+                    label={'Rol del responsable de la dependencia'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.responsable_role === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
                             <p>Campo vacío</p>
                         </div>
                     ) : null}
                 </ul>
 
                 {/*  ----------------- Validar fecha de inicio ----------------- */}
-                <div className="formData__block">
-                    <label className="formData__label">Fecha de inicio</label>
-                    <div className="formData__group formData__group--date">
-                        <div className="formData__date">
-                            <label htmlFor="s_d">Dia</label>
-                            <input name="s_d" type="number" className="formData__input" onChange={handleChange} onKeyDown={handleKeyDown} />
-                        </div> /
-                        <div className="formData__date">
-                            <label htmlFor="s_m">Mes</label>
-                            <select name="s_m" id="s_m" onChange={handleChange}>
-                                {months.map((elem, index) => {
-                                    return <option key={index} value={elem}>{elem}</option>
-                                })}
-                            </select>
-                        </div> /
-                        <div className="formData__date">
-                            <label htmlFor="s_y">Año</label>
-                            <input name="s_y" type="number" className="formData__input" onChange={handleChange} onKeyDown={handleKeyDown} />
-                        </div>
+                <div className="formData__group">
+                    <div className="formData__block">
+                        <label className="formData__label" htmlFor="career">Dia de inicio</label>
+                        <Input
+                            value={values.s_d}
+                            name={'s_d'}
+                            type={'text'}
+                            handleChange={handleChange}>
+                        </Input>
+                    </div>
+                    <div className="formData__block">
+                        <label htmlFor="s_m" className="formData__label">Mes de inicio</label>
+                        <select className="formData__select" name="s_m" id="s_m" onChange={handleChange}>
+                            {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
+                            {months.map((_elem, index) => {
+                                return <option key={index + 1} value={_elem}>{_elem}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="formData__block">
+                        <label htmlFor="sem" className="formData__label">Año de inicio</label>
+                        <Input
+                            value={values.s_y}
+                            name={'s_y'}
+                            type={'text'}
+                            handleChange={handleChange}>
+                        </Input>
                     </div>
                 </div>
                 <ul className='validationList'>
-                    {(validations.s_d === false || validations.s_y === false) ? (
+                    {(validations.s_d === false || validations.s_m === false || validations.s_y === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Se deben llenar todos los campos</p>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Existen campos vacíos</p>
                         </div>
                     ) : null}
                 </ul>
 
-                {/*  ----------------- Validar fecha de finalizacion ----------------- */}
-                <div className="formData__block">
-                    <label className="formData__label">Fecha de finalizacion</label>
-                    <div className="formData__group formData__group--date">
-                        <div className="formData__date">
-                            <label htmlFor="e_d">Dia</label>
-                            <input name="e_d" type="number" className="formData__input" onChange={handleChange} onKeyDown={handleKeyDown} />
-                        </div> /
-                        <div className="formData__date">
-                            <label htmlFor="e_m">Mes</label>
-                            <select name="e_m" id="e_m" onChange={handleChange}>
-                                {months.map((elem, index) => {
-                                    return <option key={index} value={months[index]}>{months[index]}</option>
-                                })}
-                            </select>
-                        </div> /
-                        <div className="formData__date">
-                            <label htmlFor="e_y">Año</label>
-                            <input name="e_y" type="number" className="formData__input" onChange={handleChange} onKeyDown={handleKeyDown} />
-                        </div>
+                {/*  ----------------- Validar fecha de finalización ----------------- */}
+                {/* <p>Fecha de finalización</p> */}
+                <div className="formData__group">
+                    <div className="formData__block">
+                        <label className="formData__label" htmlFor="career">Día de finalización</label>
+                        <Input
+                            value={values.e_d}
+                            name={'e_d'}
+                            type={'number'}
+                            handleChange={handleChange}>
+                        </Input>
+                    </div>
+                    <div className="formData__block">
+                        <label htmlFor="e_m" className="formData__label">Mes de finalización</label>
+                        <select className="formData__select" name="e_m" id="e_m" onChange={handleChange}>
+                            {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
+                            {months.map((_elem, index) => {
+                                return <option key={index + 1} value={_elem}>{_elem}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="formData__block">
+                        <label htmlFor="sem" className="formData__label">Año de finalización</label>
+                        <Input
+                            value={values.e_y}
+                            name={'e_y'}
+                            type={'number'}
+                            handleChange={handleChange}>
+                        </Input>
                     </div>
                 </div>
                 <ul className='validationList'>
-                    {(validations.e_d === false || validations.e_y === false) ? (
+                    {(validations.e_d === false || validations.e_m === false || validations.e_y === false) ? (
                         <div className="validationList__item">
-                            <Icon icon={'cancel'} customIconClassName='danger'></Icon>
-                            <p>Se deben llenar todos los campos</p>
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Existen campos vacíos</p>
                         </div>
                     ) : null}
                 </ul>
 
-                <input type="button" value="Guardar" className="btn btn__save" />
+                {/*  ----------------- Validar nombre del titular ----------------- */}
+                <Input
+                    value={values.titular_name}
+                    name={'titular_name'}
+                    label={'Nombre del titular de la dependencia'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.titular_name === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar rol del titular ----------------- */}
+                <Input
+                    value={values.titular_role}
+                    name={'titular_role'}
+                    label={'Rol del titular de la dependencia'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.titular_role === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar nombre del programa----------------- */}
+                <Input
+                    value={values.program_name}
+                    name={'program_name'}
+                    label={'Nombre del programa'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.program_name === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
+
+                {/*  ----------------- Validar si es dentro de la institucion ----------------- */}
+                <div className="formData__block">
+                    <label className="formData__label" htmlFor='inLocation'>Será dentro de la institución?</label>
+                    <select className="formData__select" value={values.inLocation} name="inLocation" id="inLocation" onChange={handleChange}>
+                        <option value="no">No</option>
+                        <option value="si">Sí</option>
+                    </select>
+                </div>
+
+                {/*  ----------------- Validar ubicación de la dependencia ----------------- */}
+                <Input
+                    value={values.location_name}
+                    name={'location_name'}
+                    label={'Nombre de realización del servicio'}
+                    type={'text'}
+                    handleChange={handleChange}>
+                </Input>
+                <ul className='validationList'>
+                    {(validations.location_name === false) ? (
+                        <div className="validationList__item">
+                            <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                            <p>Campo vacío</p>
+                        </div>
+                    ) : null}
+                </ul>
 
             </div>
         </>
