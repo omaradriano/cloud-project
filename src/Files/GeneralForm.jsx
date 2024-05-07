@@ -4,6 +4,7 @@ import { careers } from "../utils/files"
 import Icon from "../UtilComponents/Icon";
 import { months } from "../utils/aux";
 import { AuthContext } from "../Context/Context";
+import { Link } from "react-router-dom";
 
 const CartaCompromiso = () => {
 
@@ -111,7 +112,8 @@ const CartaCompromiso = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email: authentication.email, ...values, name: values.name.split(' ').slice(2,).concat(values.name.split(' ').slice(0,2)) })
+                body: JSON.stringify({ email: authentication.email, ...values })
+                // , name: values.name.split(' ').slice(2,).concat(values.name.split(' ').slice(0,2))
             }
             fetch('http://127.0.0.1:5006/data/updatetest', options)
                 .then(res => res.json())
@@ -164,7 +166,8 @@ const CartaCompromiso = () => {
         <>
             <div className="formData">
                 <input type="button" value="Guardar" className={`btn btn__save`} onClick={() => submitData()} />
-                <input type="button" value="Llenar formularios" className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`}/>
+                {/* <input type="button" value="Llenar formularios" className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`}/> */}
+                <Link className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`} to={`/fillfile`}>Llenado de documentos <Icon icon={'arrow_forward'}></Icon></Link>
                 {/*  ----------------- Validar nombre ----------------- */}
                 <Input
                     value={values.name}
@@ -282,7 +285,7 @@ const CartaCompromiso = () => {
                     </div>
                     <div className="formData__block">
                         <label htmlFor="sem" className="formData__label">Semestre</label>
-                        <select className="formData__select" name="sem" id="sem" onChange={handleChange}>
+                        <select className="formData__select" name="sem" id="sem" value={values.sem} onChange={handleChange}>
                             {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
                             {months.map((_elem, index) => {
                                 return <option key={index + 1} value={index + 1}>{index + 1}</option>
@@ -380,7 +383,7 @@ const CartaCompromiso = () => {
                     </div>
                     <div className="formData__block">
                         <label htmlFor="s_m" className="formData__label">Mes de inicio</label>
-                        <select className="formData__select" name="s_m" id="s_m" onChange={handleChange}>
+                        <select className="formData__select" name="s_m" id="s_m" value={values.s_m} onChange={handleChange}>
                             {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
                             {months.map((_elem, index) => {
                                 return <option key={index + 1} value={_elem}>{_elem}</option>
@@ -420,7 +423,7 @@ const CartaCompromiso = () => {
                     </div>
                     <div className="formData__block">
                         <label htmlFor="e_m" className="formData__label">Mes de finalización</label>
-                        <select className="formData__select" name="e_m" id="e_m" onChange={handleChange}>
+                        <select className="formData__select" name="e_m" id="e_m" value={values.e_m} onChange={handleChange}>
                             {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
                             {months.map((_elem, index) => {
                                 return <option key={index + 1} value={_elem}>{_elem}</option>
