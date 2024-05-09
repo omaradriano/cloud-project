@@ -12,10 +12,10 @@ const ProtectedRoute = ({ children }) => {
     },[])
     
 
-    // if (!authentication) {
-    //     // Redirect to login if not authenticated
-    //     return <Navigate to="/auth" />;
-    // }
+    if (!authentication) {
+        // Redirect to login if not authenticated
+        return <Navigate to="/auth" />;
+    }
 
     return children;
 };

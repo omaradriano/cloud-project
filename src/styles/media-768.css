@@ -4,14 +4,12 @@
     /* ROOT */
     /* -------------------------- */
     #root {
-        width: 100%;
-        height: 100vh;
     
         display: grid;
         grid:
             "header header header" 75px 
             "nav nav nav" 80px 
-            "body body body" auto 
+            "body body body" calc(100vh - 155px)
             / 1fr ;
     }
 

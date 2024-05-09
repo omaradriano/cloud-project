@@ -114,7 +114,7 @@ body {
     min-width: 100%;
     max-width: 100%;
     width: 100vw;
-    min-height: 700px;
+    min-height: 100vh;
 }
 
 
@@ -123,11 +123,11 @@ body {
 /* -------------------------- */
 #root {
     width: 100%;
-    height: 100vh;
+    min-height: 100%;
 
     display: grid;
     grid:
-        "header" 60px "nav" 70px "body" auto / 1fr;
+        "header" 60px "nav" 70px "body" calc(100vh - 130px) / 1fr;
 }
 
 /* -------------------------- */
@@ -200,6 +200,7 @@ body {
     background-color: #fff;
     padding: 8px;
     min-height: 500px;
+    height: 100% !important;
 }
 
 /* -------------------------- */
@@ -479,14 +480,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.fillfile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: auto;
 }
 
 .fillfile>h3 {
@@ -866,6 +859,7 @@ input[type='number'] {
     height: 100%;
     /* overflow-y: scroll; */
     padding-top: 20px;
+    padding-bottom: 30px;
 }
 
 .accordion {
@@ -913,4 +907,44 @@ input[type='number'] {
     position: fixed;
     right: 30px;
     bottom: 30px;
+}
+
+/* -------------------------- */
+/* SECCION DE LLENADO DE DOCUMENTOS DESPUES DE HABER LLENADO EL FORMULARIO PRINCIPAL */
+/* -------------------------- */
+
+.fillfile {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-body-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    padding-top: 20px;
+    overflow-y: auto;
+
+}
+
+.fillfile > h1 {
+    margin-bottom: 15px;
+}
+
+.accordion-body{
+    position: relative;
+}
+
+.btn__download {
+    background-color: var(--tec-yellow-color) !important;
+    position: relative;
+    /* bottom: 10px; */
+    /* right: 10px; */
+}
+
+.btn__back{
+    background-color: var(--tec-yellow-color);
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+    z-index: 10;
 }

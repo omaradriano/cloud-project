@@ -39,6 +39,7 @@ const Nav = () => {
                                 <Link to={`/profile`}>Perfil</Link>
                                 <Link onClick={() => {
                                     signOut(auth).then(() => {
+                                        localStorage.removeItem('generalUserData')
                                         navigate('/home')
                                     }).catch((error) => {
                                         // An error happened.

@@ -1,7 +1,7 @@
 const CartaCompromiso = () => {
     return(
         <>
-            <input type="button" value={'Presionar boton'} className="btn-success"/>
+            <p>Carta Compromiso</p>
         </>
     )
 }
