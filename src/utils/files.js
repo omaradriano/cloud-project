@@ -7,7 +7,6 @@ import solicitud from '../assets/FilesImages/formulario_de_solicitud.png'
 import evaluacion_cualitativa from '../assets/FilesImages/formulario_evaluacion_cualitativa_INSTITUCION.png'
 import plan_de_trabajo from '../assets/FilesImages/formulario_plan_de_trabajo.png'
 
-import CartaCompromiso from '../Files/GeneralForm'
 /**
  * @abstract Objeto que exporta las carreras de los documentos usados.
  * Se usa en:
@@ -67,5 +66,16 @@ export const SS_files = {
         filename: plan_de_trabajo,
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum officia rerum consequatur! Magni, nam? Totam laboriosam amet aliquid, dicta eveniet consectetur quia. Voluptatum sapiente architecto at perspiciatis, ducimus necessitatibus aut?'
     },
+}
+
+export const docsKeys = {
+    ['formatodeautoevaluacioncualitativa']: 'autoevaluacion_cualitativa',
+    ['formatodeevaluacioncualitativallenadoporlainstitucion']: 'evaluacion_cualitatitiva',
+    ['formulariodecartacompromiso']: 'carta_compromiso',
+    ['formatodeevaluaciondelasactividadesporelprestadordeserviciosocial']: 'evaluacion_actividades',
+    ['formulariodecartadeasignacion']: 'carta_asignacion',
+    ['formatodereportebimestral']: 'reporte_bimestral',
+    ['formulariodesolicitud']: 'formulario_solicitud',
+    ['formulariodeplandetrabajo']: 'plan_trabajo'
 }
 

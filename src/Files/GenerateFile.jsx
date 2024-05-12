@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../Context/Context"
 
 import { SS_files } from "../utils/files"
@@ -19,95 +19,16 @@ const fileKeys = Object.keys(SS_files)
 
 const GenerateFile = () => {
 
+    const [autoevaluacionCualitativaCompleted, setAutoevaluacionCualitativaCompleted] = useState(false)
+    const [evaluacionCualitativaCompleted, setEvaluacionCualitativaCompleted] = useState(false)
+    const [cartaCompromisoCompleted, setCartaCompromisoCompleted] = useState(false)
+    const [evaluacionActividadesCompleted, setEvaluacionActividadesCompleted] = useState(false)
+    const [cartaAsignacionCompleted, setCartaAsignacionCompleted] = useState(false)
+    const [reporteBimestralCompleted, setReporteBimestralCompleted] = useState(false)
+    const [formularioSolicitudCompleted, setFormularioSolicitudCompleted] = useState(false)
+    const [planTrabajoCompleted, setPlanTrabajoCompleted] = useState(false)
+
     const { authentication } = useContext(AuthContext)
-
-    const docsKeys = {
-        ['formatodeautoevaluacioncualitativa']: 'autoevaluacion_cualitativa',
-        ['formatodeevaluacioncualitativallenadoporlainstitucion']: 'evaluacion_cualitatitiva',
-        ['formulariodecartacompromiso']: 'carta_compromiso',
-        ['formatodeevaluaciondelasactividadesporelprestadordeserviciosocial']: 'evaluacion_actividades',
-        ['formulariodecartadeasignacion']: 'carta_asignacion',
-        ['formatodereportebimestral']: 'reporte_bimestral',
-        ['formulariodesolicitud']: 'formulario_solicitud',
-        ['formulariodeplandetrabajo']: 'plan_trabajo'
-
-    }
-
-    function generateDocument(document_name, type, documentData = {}) {
-        const finalData = JSON.parse(localStorage.getItem('generalUserData'))
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ ...finalData, ...documentData })
-        }
-
-        console.log('Información enviada', finalData);
-        console.log(docsKeys[document_name]);
-        if (authentication) {
-            console.log('Generando documento');
-            switch (type) {
-                case 'pdf':
-                    fetch(`http://localhost:5006/files/download/${docsKeys[document_name]}/pdf`, options)
-                        .then(response => {
-                            // Verificar si la respuesta es exitosa
-                            if (!response.ok) {
-                                throw new Error('Error al obtener el archivo');
-                            }
-                            // Devolver el cuerpo de la respuesta como JSON
-                            return response.json();
-                        })
-                        .then(data => {
-                            // Obtener la URL del objeto de respuesta
-                            const url = data.url;
-                            console.log(url);
-                            // Crear un enlace <a> temporal
-                            const link = document.createElement('a');
-                            link.href = url;
-                            // Establecer el nombre de archivo para el enlace (puedes ajustarlo según tu preferencia)
-                            link.setAttribute('download', 'documento.pdf');
-                            // Simular un clic en el enlace para descargar el archivo
-                            document.body.appendChild(link);
-                            link.click();
-                            // Limpiar el enlace después de la descarga
-                            document.body.removeChild(link);
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                    break
-                case 'docx':
-                    fetch(`http://localhost:5006/files/download/${docsKeys[document_name]}/docx`, options)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Error al descargar el archivo');
-                            }
-                            return response.blob();
-                        })
-                        .then(blob => {
-                            // Crear un objeto URL para el Blob
-                            const url = window.URL.createObjectURL(new Blob([blob]));
-                            // Crear un enlace <a> temporal
-                            const link = document.createElement('a');
-                            link.href = url;
-                            // Establecer el nombre de archivo para el enlace
-                            link.setAttribute('download', `${docsKeys[document_name]}.docx`);
-                            // Simular un clic en el enlace para descargar el archivo
-                            document.body.appendChild(link);
-                            link.click();
-                            // Limpiar el enlace y el objeto URL después de la descarga
-                            link.parentNode.removeChild(link);
-                            window.URL.revokeObjectURL(url);
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        })
-                    break
-            }
-        }
-    }
 
     return (
         <>
@@ -121,28 +42,28 @@ const GenerateFile = () => {
                         let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                         switch (componentName) {
                             case 'formatodeautoevaluacioncualitativa':
-                                renderedComponent = <AutoevaluacionCualitativa></AutoevaluacionCualitativa>
+                                renderedComponent = <AutoevaluacionCualitativa stateFunction={setAutoevaluacionCualitativaCompleted} componentName={componentName}auth={authentication}></AutoevaluacionCualitativa>
                                 break
                             case 'formatodeevaluacioncualitativallenadoporlainstitucion':
-                                renderedComponent = <EvaluacionCualitativa></EvaluacionCualitativa>
+                                renderedComponent = <EvaluacionCualitativa stateFunction={setEvaluacionCualitativaCompleted} componentName={componentName} auth={authentication}></EvaluacionCualitativa>
                                 break
                             case 'formulariodecartacompromiso':
-                                renderedComponent = <CartaCompromiso></CartaCompromiso>
+                                renderedComponent = <CartaCompromiso stateFunction={setCartaCompromisoCompleted} componentName={componentName} auth={authentication}></CartaCompromiso>
                                 break
                             case 'formatodeevaluaciondelasactividadesporelprestadordeserviciosocial':
-                                renderedComponent = <EvaluacionActividades></EvaluacionActividades>
+                                renderedComponent = <EvaluacionActividades stateFunction={setEvaluacionActividadesCompleted} componentName={componentName} auth={authentication}></EvaluacionActividades>
                                 break
                             case 'formulariodecartadeasignacion':
-                                renderedComponent = <CartaAsignacion></CartaAsignacion>
+                                renderedComponent = <CartaAsignacion stateFunction={setCartaAsignacionCompleted} componentName={componentName} auth={authentication}></CartaAsignacion>
                                 break
                             case 'formatodereportebimestral':
-                                renderedComponent = <ReporteBimestral></ReporteBimestral>
+                                renderedComponent = <ReporteBimestral stateFunction={setReporteBimestralCompleted} componentName={componentName} auth={authentication}></ReporteBimestral>
                                 break
                             case 'formulariodesolicitud':
-                                renderedComponent = <FormularioSolicitud></FormularioSolicitud>
+                                renderedComponent = <FormularioSolicitud stateFunction={setFormularioSolicitudCompleted} componentName={componentName} auth={authentication}></FormularioSolicitud>
                                 break
                             case 'formulariodeplandetrabajo':
-                                renderedComponent = <PlanTrabajo></PlanTrabajo>
+                                renderedComponent = <PlanTrabajo stateFunction={setPlanTrabajoCompleted} componentName={componentName} auth={authentication}></PlanTrabajo>
                                 break
                         }
                         return (
@@ -153,18 +74,8 @@ const GenerateFile = () => {
                                     </button>
                                 </h2>
                                 <div id={`${name}`} className={`accordion-collapse collapse ${index === 0 ? 'show' : ''}`} data-bs-parent="#documents">
-                                    <div className="accordion-body">
+                                    <div className="accordion-body form__inputs">
                                         {renderedComponent}
-                                        <div className="dropdown btn__download">
-                                            <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Descargar
-                                            </a>
-
-                                            <ul className="dropdown-menu">
-                                                <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'pdf')}>PDF</a></li>
-                                                <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'docx')}>DOCX</a></li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

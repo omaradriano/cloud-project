@@ -6,6 +6,8 @@ import { months } from "../utils/aux";
 import { AuthContext } from "../Context/Context";
 import { Link } from "react-router-dom";
 
+import { validateAll, handleValidations } from "../utils/forms_functions";
+
 const GeneralForm = () => {
 
     const careerarray = Object.keys(careers)
@@ -75,20 +77,9 @@ const GeneralForm = () => {
 
     const [validationsCompleted, setValidationsCompleted] = useState(false)
 
-    //Verifica los campos que estan vacíos para mostrar una alerta del campo vacío
-    function handleValidations(objectValidations) {
-        const keys = Object.keys(objectValidations)
-        keys.forEach((elem) => {
-            if (values[elem].length === 0) {
-                setValidations(prev => ({ ...prev, [elem]: false }))
-            } else {
-                setValidations(prev => ({ ...prev, [elem]: true }))
-            }
-        })
-    }
     //Esto se ejecuta cada vez que un valor en el formulario cambia
     useEffect(() => {
-        handleValidations(values)
+        handleValidations(values, setValidations, values)
     }, [values])
 
     //Para leer los valores de los formularios en tiempo real
@@ -126,19 +117,6 @@ const GeneralForm = () => {
         } else {
             console.log('No existe autenticacion, no se pueden enviar los datos');
         }
-    }
-
-    // Valida todos los campos que hay en general form
-    function validateAll(validations_obj) {
-        let validate = true
-        for (const key in validations_obj) {
-            if (Object.hasOwnProperty.call(validations_obj, key)) {
-                if (validations[key] === false) {
-                    validate = false
-                }
-            }
-        }
-        return validate
     }
 
     //Este useEffect solo se usa una vez para obtener la fecha actual y cargarla al state de values
