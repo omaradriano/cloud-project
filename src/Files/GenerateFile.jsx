@@ -42,7 +42,7 @@ const GenerateFile = () => {
                         let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                         switch (componentName) {
                             case 'formatodeautoevaluacioncualitativa':
-                                renderedComponent = <AutoevaluacionCualitativa stateFunction={setAutoevaluacionCualitativaCompleted} componentName={componentName}auth={authentication}></AutoevaluacionCualitativa>
+                                renderedComponent = <AutoevaluacionCualitativa stateFunction={setAutoevaluacionCualitativaCompleted} componentName={componentName} auth={authentication}></AutoevaluacionCualitativa>
                                 break
                             case 'formatodeevaluacioncualitativallenadoporlainstitucion':
                                 renderedComponent = <EvaluacionCualitativa stateFunction={setEvaluacionCualitativaCompleted} componentName={componentName} auth={authentication}></EvaluacionCualitativa>
@@ -54,7 +54,7 @@ const GenerateFile = () => {
                                 renderedComponent = <EvaluacionActividades stateFunction={setEvaluacionActividadesCompleted} componentName={componentName} auth={authentication}></EvaluacionActividades>
                                 break
                             case 'formulariodecartadeasignacion':
-                                renderedComponent = <CartaAsignacion stateFunction={setCartaAsignacionCompleted} componentName={componentName} auth={authentication}></CartaAsignacion>
+                                renderedComponent = <CartaAsignacion stateFunction={setCartaAsignacionCompleted} componentName={componentName} auth={authentication} validationsCompleted={cartaAsignacionCompleted}></CartaAsignacion>
                                 break
                             case 'formatodereportebimestral':
                                 renderedComponent = <ReporteBimestral stateFunction={setReporteBimestralCompleted} componentName={componentName} auth={authentication}></ReporteBimestral>

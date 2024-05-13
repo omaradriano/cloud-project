@@ -43,6 +43,7 @@ const GeneralForm = () => {
         program_name: '',
         inLocation: 'no',
         location_name: '',
+        gender:''
     })
 
     //validaciones de cada uno de los campos (únicamente valida que no sean campos vacíos)
@@ -73,6 +74,7 @@ const GeneralForm = () => {
         program_name: null,
         // inLocation: null,
         location_name: null,
+        gender: null
     })
 
     const [validationsCompleted, setValidationsCompleted] = useState(false)
@@ -504,6 +506,23 @@ const GeneralForm = () => {
                             <option value="si">Sí</option>
                         </select>
                     </div>
+
+                    {/*  ----------------- Validar genero ----------------- */}
+                    <div className="formData__block">
+                        <label className="formData__label" htmlFor='gender'>Será dentro de la institución?</label>
+                        <select className="formData__select" value={values.inLocation} name="gender" id="gender" onChange={handleChange}>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                    <ul className='validationList'>
+                        {(validations.gender === false) ? (
+                            <div className="validationList__item">
+                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
+                                <p>Campo vacío</p>
+                            </div>
+                        ) : null}
+                    </ul>
 
                     {/*  ----------------- Validar ubicación de la dependencia ----------------- */}
                     <Input

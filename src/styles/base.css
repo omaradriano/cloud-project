@@ -804,6 +804,10 @@ input[type='number'] {
     align-content: space-around;
     /* padding: 10px; */
 }
+.formData__block--list {
+    flex-direction: row;
+    margin-bottom: 15px;
+}
 
 .formData__group > .formData__block:nth-child(n){
     margin-right: 10px;
@@ -985,4 +989,17 @@ input[type='number'] {
 
 .AUT_CUAL__custom > .formData__block:nth-child(2) > input:checked{
     background-color: var(--tec-blue-color);
+}
+
+/* -------------------------- */
+/* INPUTS QUE SE RENDERIZAN EN CADA UNO DE LOS DOCUMENTOS
+            CARTA DE ASIGNACION*/
+/* -------------------------- */
+
+input[type='radio'] {
+    margin-right: 10px;
+}
+
+h6 {
+    margin-top: 15px;
 }

@@ -26,6 +26,7 @@ export function validateAll(validations_obj) {
 export function handleValidations(objectValidations, stateFunction, valuesObject) {
     const keys = Object.keys(objectValidations)
     keys.forEach((elem) => {
+        console.log(elem);
         if (valuesObject[elem].length === 0) {
             stateFunction(prev => ({ ...prev, [elem]: false }))
         } else {

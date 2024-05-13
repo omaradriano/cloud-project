@@ -1,7 +1,7 @@
 
 // Este componente se usa UNICAMENTE para los input tipo number y text
 
-const Input = ({label, name, type, value, handleChange = ()=>{}}) => {
+const Input = ({label, name, type, value, handleChange = ()=>{}, maxlength}) => {
 
     // Funciones para validar los campos input NUMBER
     // Evita que se usen las flechas del teclado arriba y abajo
@@ -30,7 +30,8 @@ const Input = ({label, name, type, value, handleChange = ()=>{}}) => {
                     className="formData__input" 
                     name={name}
                     id={name} 
-                    type={type} />
+                    type={type} 
+                    maxLength={maxlength}/>
             </div>
         </>
     )
