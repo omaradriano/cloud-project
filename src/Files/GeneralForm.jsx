@@ -7,6 +7,7 @@ import { AuthContext } from "../Context/Context";
 import { Link } from "react-router-dom";
 
 import { validateAll, handleValidations } from "../utils/forms_functions";
+import { serverDomain } from "../config";
 
 const GeneralForm = () => {
 
@@ -113,7 +114,7 @@ const GeneralForm = () => {
             }
             localStorage.setItem('generalUserData', JSON.stringify({ email: authentication.email, ...values }))
 
-            fetch('http://127.0.0.1:5006/data/updatetest', options)
+            fetch(`${serverDomain}/data/updatetest`, options)
                 .then(res => res.json())
                 .then(res => console.log(res))
         } else {
@@ -145,7 +146,7 @@ const GeneralForm = () => {
                 const data = JSON.parse(localStorage.getItem('generalUserData'))
                 setValues({ ...data })
             } else {
-                fetch(`http://localhost:5006/data/getUserData/${authentication.email}`)
+                fetch(`${serverDomain}/data/getUserData/${authentication.email}`)
                     .then(res => res.json())
                     .then(res => {
                         console.log(res);

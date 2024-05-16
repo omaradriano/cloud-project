@@ -1,3 +1,4 @@
+import { serverDomain } from "../config"
 import { docsKeys } from "./files"
 
 /**
@@ -57,7 +58,7 @@ export function generateDocument(document_name, type, auth, documentData = {}) {
             console.log('Generando documento');
             switch (type) {
                 case 'pdf':
-                    fetch(`http://localhost:5006/files/download/${docsKeys[document_name]}/pdf`, options)
+                    fetch(`${serverDomain}/files/download/${docsKeys[document_name]}/pdf`, options)
                         .then(response => {
                             // Verificar si la respuesta es exitosa
                             if (!response.ok) {
@@ -86,7 +87,7 @@ export function generateDocument(document_name, type, auth, documentData = {}) {
                         });
                     break
                 case 'docx':
-                    fetch(`http://localhost:5006/files/download/${docsKeys[document_name]}/docx`, options)
+                    fetch(`${serverDomain}/files/download/${docsKeys[document_name]}/docx`, options)
                         .then(response => {
                             if (!response.ok) {
                                 throw new Error('Error al descargar el archivo');

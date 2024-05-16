@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const provider = new GoogleAuthProvider();
 import { auth } from '../firebaseAuth';
+import { serverDomain } from '../config'
 
 const Auth = () => {
     // state que maneja la opcion de autenticacion (signin y signup)
@@ -243,7 +244,7 @@ const Auth = () => {
                                     },
                                     body: JSON.stringify({ email: user.email })
                                 }
-                                fetch('http://localhost:5006/auth/register', options)
+                                fetch(`${serverDomain}/auth/register`, options)
                                     .then(res => {
                                         return res.json()
                                     })
