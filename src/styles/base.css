@@ -190,6 +190,25 @@ body {
     color: white;
 }
 
+.btn-burguer {
+    color: white;
+    height: 56px;
+    width: 56px;
+    font-size: 40px !important;
+}
+
+.dropdown-menu.show {
+    /* background-color: red; */
+    transform: translate(0px, 80px) !important;
+    width: 250px;
+    border-radius: 0;
+    border: 1px solid black;
+}
+
+.dropdown-menu.show > li >a:hover{
+    background-color: var(--tec-blue-color);
+    color: #fff;
+}
 /* -------------------------- */
 /* BODY */
 /* -------------------------- */

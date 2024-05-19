@@ -52,7 +52,36 @@ const Nav = () => {
                         <a href="#">Panel</a>
                     </ul>
                 ) : (
-                    <Icon icon={"menu"} customIconClassName='pointer' action={handleModalToggle} />
+                    <>
+                        <div className="dropdown">
+                            <a className="material-icons btn btn-burguer" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                menu
+                            </a>
+
+                            <ul className="dropdown-menu">
+                                {/* <li><Link to='/profile' className='dropdown-item'>Perfil</Link></li> */}
+                                {!authentication ? (
+                                    <li><Link to='/auth' className='dropdown-item'>Iniciar Sesion</Link></li>
+                                ) : (
+                                    <>
+                                        <li><Link to={`/profile`} className='dropdown-item'>Perfil</Link></li>
+                                        <li><Link onClick={() => {
+                                            signOut(auth).then(() => {
+                                                localStorage.removeItem('generalUserData')
+                                                navigate('/home')
+                                            }).catch((error) => {
+                                                // An error happened.
+                                            });
+                                        }} className='dropdown-item'>Logout</Link></li>
+                                    </>
+                                )}
+                                {/* <li><Link to={`/feedback`} className='dropdown-item'>Feedback</Link></li> */}
+                                {/* <li><Link to={`/profile`} className='dropdown-item'>Perfil</Link></li> */}
+                            </ul>
+                        </div>
+                        {/* <Icon icon={"menu"} customIconClassName='pointer' action={handleModalToggle} /> */}
+                    </>
+
                 )}
             </div>
         </>
