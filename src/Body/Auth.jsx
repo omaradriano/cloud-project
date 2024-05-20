@@ -252,6 +252,21 @@ const Auth = () => {
                                         console.log(message.message, 'Este mensaje se queda para una notificacion')
                                         navigate('/home')
                                     })
+                                if (user) {
+                                    if (localStorage.getItem('generalUserData')) {
+                                        JSON.parse(localStorage.getItem('generalUserData'))
+                                    } else {
+                                        fetch(`${serverDomain}/data/getUserData/${user.email}`)
+                                            .then(res => res.json())
+                                            .then(res => {
+                                                console.log(res.userdata);
+                                                const fetchedData = res.userdata
+                                                delete fetchedData._id //Eliminar el ID de la base de datos para no mostrarlo en el front
+                                                console.log(fetchedData);
+                                                localStorage.setItem('generalUserData', JSON.stringify({ ...fetchedData }))
+                                            })
+                                    }
+                                }
                             }).catch((error) => {
                                 // Handle Errors here.
                                 const errorCode = error.code;

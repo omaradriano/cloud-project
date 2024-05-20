@@ -29,10 +29,10 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setAuthentication(user)
-        console.log('user logged in');
+        // console.log('user logged in');
       } else {
         setAuthentication(null)
-        console.log("user is logged out")
+        // console.log("user is logged out")
       }
     });
     handleResize()

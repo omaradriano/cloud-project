@@ -70,7 +70,7 @@ export const SS_files = {
 
 export const docsKeys = {
     ['formatodeautoevaluacioncualitativa']: 'autoevaluacion_cualitativa',
-    ['formatodeevaluacioncualitativallenadoporlainstitucion']: 'evaluacion_cualitatitiva',
+    ['formatodeevaluacioncualitativallenadoporlainstitucion']: 'evaluacion_cualitativa',
     ['formulariodecartacompromiso']: 'carta_compromiso',
     ['formatodeevaluaciondelasactividadesporelprestadordeserviciosocial']: 'evaluacion_actividades',
     ['formulariodecartadeasignacion']: 'carta_asignacion',

@@ -44,7 +44,7 @@ const GeneralForm = () => {
         program_name: '',
         inLocation: 'no',
         location_name: '',
-        gender:''
+        gender: ''
     })
 
     //validaciones de cada uno de los campos (únicamente valida que no sean campos vacíos)
@@ -87,8 +87,8 @@ const GeneralForm = () => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
     }, [values, validations])
 
@@ -131,34 +131,12 @@ const GeneralForm = () => {
         const year = date.getFullYear(); // Obtiene el año (cuatro dígitos)
 
         setValues({
-            ...values,
+            ...JSON.parse(localStorage.getItem('generalUserData')),
             a_d: String(day),
             a_m: months[month],
             a_y: String(year)
         })
     }, [])
-
-    useEffect(() => {
-        //Si existe autenticacion, se van a cargar los datos del usuario.
-        //En caso de que existan datos en la sesion de localStorage se cargar, sino, se obtienen de la base de datos para cargarlos
-        if (authentication) {
-            if (localStorage.getItem('generalUserData')) {
-                const data = JSON.parse(localStorage.getItem('generalUserData'))
-                setValues({ ...data })
-            } else {
-                fetch(`${serverDomain}/data/getUserData/${authentication.email}`)
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log(res);
-                        const fetchedData = res.userdata
-                        delete fetchedData._id //Eliminar el ID de la base de datos para no mostrarlo en el front
-                        console.log(fetchedData);
-                        localStorage.setItem('generalUserData', JSON.stringify({ ...fetchedData }))
-                        setValues({ ...res.userdata })
-                    })
-            }
-        }
-    }, [authentication])
 
     return (
         <>
@@ -511,7 +489,7 @@ const GeneralForm = () => {
                     {/*  ----------------- Validar genero ----------------- */}
                     <div className="formData__block">
                         <label className="formData__label" htmlFor='gender'>Será dentro de la institución?</label>
-                        <select className="formData__select" value={values.inLocation} name="gender" id="gender" onChange={handleChange}>
+                        <select className="formData__select" value={values.gender} name="gender" id="gender" onChange={handleChange}>
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
                         </select>

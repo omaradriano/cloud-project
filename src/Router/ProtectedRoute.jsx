@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
     const {authentication} = useContext(AuthContext)
 
     useEffect(()=>{
-        console.log(authentication, 'From Protected route');
+        // console.log(authentication, 'From Protected route');
     },[])
     
 

@@ -14,6 +14,7 @@ import ReporteBimestral from "../Files/Templates/ReporteBimestral"
 import FormularioSolicitud from "../Files/Templates/FormularioSolicitud"
 import PlanTrabajo from "../Files/Templates/PlanTrabajo"
 import Icon from "../UtilComponents/Icon"
+import { serverDomain } from "../config"
 
 const fileKeys = Object.keys(SS_files)
 
@@ -28,6 +29,7 @@ const GenerateFile = () => {
     const [formularioSolicitudCompleted, setFormularioSolicitudCompleted] = useState(false)
     const [planTrabajoCompleted, setPlanTrabajoCompleted] = useState(false)
 
+    //Contexto que tiene la autenticación
     const { authentication } = useContext(AuthContext)
 
     return (
@@ -54,7 +56,7 @@ const GenerateFile = () => {
                                 renderedComponent = <EvaluacionActividades stateFunction={setEvaluacionActividadesCompleted} componentName={componentName} auth={authentication}></EvaluacionActividades>
                                 break
                             case 'formulariodecartadeasignacion':
-                                renderedComponent = <CartaAsignacion stateFunction={setCartaAsignacionCompleted} componentName={componentName} auth={authentication} validationsCompleted={cartaAsignacionCompleted}></CartaAsignacion>
+                                renderedComponent = <CartaAsignacion stateFunction={setCartaAsignacionCompleted} componentName={componentName} auth={authentication}></CartaAsignacion>
                                 break
                             case 'formatodereportebimestral':
                                 renderedComponent = <ReporteBimestral stateFunction={setReporteBimestralCompleted} componentName={componentName} auth={authentication}></ReporteBimestral>

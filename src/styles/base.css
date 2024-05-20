@@ -1022,3 +1022,8 @@ input[type='radio'] {
 h6 {
     margin-top: 15px;
 }
+
+.btn__save--file {
+    position: absolute;
+    bottom: 17px;
+}

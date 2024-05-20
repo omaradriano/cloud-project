@@ -27,7 +27,7 @@ export function validateAll(validations_obj) {
 export function handleValidations(objectValidations, stateFunction, valuesObject) {
     const keys = Object.keys(objectValidations)
     keys.forEach((elem) => {
-        console.log(elem);
+        // console.log(elem);
         if (valuesObject[elem].length === 0) {
             stateFunction(prev => ({ ...prev, [elem]: false }))
         } else {
@@ -55,7 +55,7 @@ export function generateDocument(document_name, type, auth, documentData = {}) {
         console.log('Información enviada', finalData);
         // console.log(docsKeys[document_name]);
         if (auth) {
-            console.log('Generando documento');
+            // console.log('Generando documento');
             switch (type) {
                 case 'pdf':
                     fetch(`${serverDomain}/files/download/${docsKeys[document_name]}/pdf`, options)
@@ -70,7 +70,7 @@ export function generateDocument(document_name, type, auth, documentData = {}) {
                         .then(data => {
                             // Obtener la URL del objeto de respuesta
                             const url = data.url;
-                            console.log(url);
+                            // console.log(url);
                             // Crear un enlace <a> temporal
                             const link = document.createElement('a');
                             link.href = url;
@@ -118,6 +118,29 @@ export function generateDocument(document_name, type, auth, documentData = {}) {
             console.log('No auth');
         }
     } catch (error) {
-        console.Error('Error: ',error.message);
+        console.Error('Error: ', error.message);
+    }
+}
+
+//Carga los datos a la base de datos y guarda un objeto en localStorage
+export function submitData(auth, values, componentName, serverDomain) {
+    if (auth) {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: auth.email, ...values })
+            // , name: values.name.split(' ').slice(2,).concat(values.name.split(' ').slice(0,2))
+        }
+
+        // let userData = JSON.parse(localStorage.getItem('generalUserData'))
+        // localStorage.setItem('generalUserData', JSON.stringify({ email: authentication.email, ...values }))
+
+        fetch(`${serverDomain}/data/updateUserFile/${componentName}`, options)
+            .then(res => res.json())
+            .then(res => console.log(res))
+    } else {
+        console.log('No existe autenticacion, no se pueden enviar los datos');
     }
 }

@@ -35,7 +35,8 @@ const Nav = () => {
                         {!authentication ? (
                             <Link to={`/auth`}>Iniciar Sesion</Link>
                         ) : (
-                            <>
+                            <>  
+                                <Link to={`/home`} className='dropdown-item'>Inicio</Link>
                                 <Link to={`/profile`}>Perfil</Link>
                                 <Link onClick={() => {
                                     signOut(auth).then(() => {
@@ -64,6 +65,7 @@ const Nav = () => {
                                     <li><Link to='/auth' className='dropdown-item'>Iniciar Sesion</Link></li>
                                 ) : (
                                     <>
+                                        <li><Link to={`/home`} className='dropdown-item'>Inicio</Link></li>
                                         <li><Link to={`/profile`} className='dropdown-item'>Perfil</Link></li>
                                         <li><Link onClick={() => {
                                             signOut(auth).then(() => {
