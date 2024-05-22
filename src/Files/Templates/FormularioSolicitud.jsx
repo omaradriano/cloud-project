@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { generateDocument, handleValidations, submitData, validateAll } from "../../utils/forms_functions";
 import Input from "../Components/Input";
-import { months } from "../../utils/aux";
+import { months } from "../../utils/some_aux";
 import { serverDomain } from "../../config";
 import Icon from "../../UtilComponents/Icon";
 
@@ -78,8 +78,10 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
     useEffect(() => {
         let fileData = JSON.parse(localStorage.getItem('generalUserData'))
         // console.log(fileData);
-        if (fileData.files[componentName]) {
-            setValues({ ...fileData.files[componentName] })
+        if (fileData.files) {
+            if(fileData.files[componentName]){
+                setValues({ ...fileData.files[componentName] })
+            }
         }
     }, [])
 

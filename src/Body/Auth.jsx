@@ -236,7 +236,7 @@ const Auth = () => {
                                 const token = credential.accessToken;
                                 // The signed-in user info.
                                 const user = result.user;
-                                console.log('After signin ', user);
+                                // console.log('After signin ', user);
                                 const options = {
                                     method: 'POST',
                                     headers: {
@@ -259,10 +259,10 @@ const Auth = () => {
                                         fetch(`${serverDomain}/data/getUserData/${user.email}`)
                                             .then(res => res.json())
                                             .then(res => {
-                                                console.log(res.userdata);
+                                                // console.log(res.userdata);
                                                 const fetchedData = res.userdata
                                                 delete fetchedData._id //Eliminar el ID de la base de datos para no mostrarlo en el front
-                                                console.log(fetchedData);
+                                                // console.log(fetchedData);
                                                 localStorage.setItem('generalUserData', JSON.stringify({ ...fetchedData }))
                                             })
                                     }

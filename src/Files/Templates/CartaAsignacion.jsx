@@ -75,8 +75,10 @@ const CartaAsignacion = ({ stateFunction, componentName, auth, validationsComple
     useEffect(() => {
         let fileData = JSON.parse(localStorage.getItem('generalUserData'))
         // console.log(fileData);
-        if (fileData.files[componentName]) {
-            setValues({ ...fileData.files[componentName] })
+        if (fileData.files) {
+            if(fileData.files[componentName]){
+                setValues({ ...fileData.files[componentName] })
+            }
         }
     }, [])
 

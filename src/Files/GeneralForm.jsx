@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import Input from "./Components/Input"
 import { careers } from "../utils/files"
 import Icon from "../UtilComponents/Icon";
-import { months } from "../utils/aux";
+import { months } from "../utils/some_aux";
 import { AuthContext } from "../Context/Context";
 import { Link } from "react-router-dom";
 
@@ -251,7 +251,7 @@ const GeneralForm = () => {
                     <div className="formData__group">
                         <div className="formData__block">
                             <label className="formData__label" htmlFor="career">Carrera</label>
-                            <select className="formData__select" name="career" id="career" onChange={handleChange}>
+                            <select className="formData__select" name="career" id="career" value={values.career} onChange={handleChange}>
                                 <option value="default">Selecciona una opcion</option>
                                 {careerarray.map((elem, index) => {
                                     return (
@@ -412,7 +412,7 @@ const GeneralForm = () => {
                             <Input
                                 value={values.e_y}
                                 name={'e_y'}
-                                type={'number'}
+                                type={'text'}
                                 handleChange={handleChange}>
                             </Input>
                         </div>

@@ -14,7 +14,6 @@ import ReporteBimestral from "../Files/Templates/ReporteBimestral"
 import FormularioSolicitud from "../Files/Templates/FormularioSolicitud"
 import PlanTrabajo from "../Files/Templates/PlanTrabajo"
 import Icon from "../UtilComponents/Icon"
-import { serverDomain } from "../config"
 
 const fileKeys = Object.keys(SS_files)
 
@@ -40,8 +39,10 @@ const GenerateFile = () => {
                 <div className="accordion accordion-flush" id="documents">
                     {fileKeys.map((elem, index) => {
                         let name = SS_files[elem].name.split(' ').join("")
+                        // console.log('from idk ',name);
                         let renderedComponent = null
-                        let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                        let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")    
+                        // console.log(componentName);s
                         switch (componentName) {
                             case 'formatodeautoevaluacioncualitativa':
                                 renderedComponent = <AutoevaluacionCualitativa stateFunction={setAutoevaluacionCualitativaCompleted} componentName={componentName} auth={authentication}></AutoevaluacionCualitativa>
