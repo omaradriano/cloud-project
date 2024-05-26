@@ -1017,7 +1017,7 @@ input[type='number'] {
 
 input[type='radio'] {
     margin-right: 10px;
-}
+}s
 
 h6 {
     margin-top: 15px;
@@ -1026,4 +1026,151 @@ h6 {
 .btn__save--file {
     position: absolute;
     bottom: 17px;
+}
+
+/* -------------------------- */
+/* ESTILOS DEDICADOS A LOS FORMULARIOS
+/* -------------------------- */
+
+.testform {
+    /* background-color: gray; */
+    padding: 10px;
+}
+
+.icon--inputPosition{
+    /* position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%); */
+    margin-right: 10px;
+}
+
+.icon__input---pos {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: rgb(198, 198, 0);
+    
+}
+
+.form__input, .form__select, .form__radios {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    /* padding: 5px; */
+    /* background-color: orange; */
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    width: 100%;
+}
+
+.formdata__radiosgroup {
+    /* background-color: red; */
+    padding: 10px;
+    border: 1px solid rgb(172, 172, 172);
+    border-radius: 10px;
+}
+
+.form__input > label, 
+.form__select > label,
+.form__radios > label {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.form__input > label > span, 
+.form__select > label > span,
+.form__radios > label > span{
+    margin-left: 5px;
+    display: flex !important;
+    align-items: center;
+}
+
+.form__input > label > span > span, 
+.form__select > label > span > span,
+.form__radios > label > span > span{
+    font-size: 18px;
+}
+
+.form__input > label > span:hover, 
+.form__select > label > span:hover,
+.form__radios > label > span:hover {
+    color: purple;
+}
+
+.form__input > input, .form__select > select {
+    height: 36px;
+    border-radius: 5px;
+    border: none;
+    /* border: 0.8px solid rgb(82, 82, 82); */
+    
+}
+
+.state-warning > select, .state-warning > input {
+    border: 2px solid orange;
+}
+.state-warning > select, .state-warning > input {
+    border: 2px solid orange;
+}
+.state-warning > .conditions > p {
+    color: orange;
+}
+.state-warning > .conditions > span {
+    color: rgb(255, 188, 64);
+}
+
+/* .form__select > select:focus{
+    border: 2px solid orange !important;
+} */
+
+.conditions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2px;
+    /* transform: translate(10px, 0); */
+    /* padding-left: 10px; */
+}
+
+.conditions > p {
+    margin-bottom: 0;
+}
+
+.conditions > span {
+    margin: 0 2px 0 10px;
+    font-size: 15px !important;
+}
+
+.formdata__group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formdata__options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.formdata__options {
+    gap: 5px;
+}
+
+.mb-5p {
+    margin-bottom: 10px;
+}
+
+.input__errorMessage {
+    /* color: orange; */
+    font-size: 14px;
+    padding-left: 5px;
+}
+
+.form-bg {
+    /* position: absolute; */
+    left: 0;
+    height: 100%;
 }

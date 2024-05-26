@@ -18,6 +18,7 @@ import router from './Router/Router.jsx'
  * Browser router donde se agregan las rutas, estas son renderizadas en el Outlet
  */
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />

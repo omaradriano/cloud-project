@@ -6,8 +6,12 @@ import { months } from "../utils/some_aux";
 import { AuthContext } from "../Context/Context";
 import { Link } from "react-router-dom";
 
+import bisonte from '../assets/imgs/bisontepapel.png'
+
 import { validateAll, handleValidations } from "../utils/forms_functions";
 import { serverDomain } from "../config";
+import InputText from "./Components/InputText";
+import InputSelect from "./Components/InputSelect";
 
 const GeneralForm = () => {
 
@@ -42,7 +46,7 @@ const GeneralForm = () => {
         titular_name: '',
         titular_role: '',
         program_name: '',
-        inLocation: 'no',
+        inLocation: '',
         location_name: '',
         gender: ''
     })
@@ -87,8 +91,8 @@ const GeneralForm = () => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        // console.log(values);
-        // console.log('Validations ', validations);
+        console.log(values);
+        console.log('Validations ', validations);
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
     }, [values, validations])
 
@@ -138,387 +142,311 @@ const GeneralForm = () => {
         })
     }, [])
 
+    useEffect(() => {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+        // Devuelve una función de limpieza para detener las instancias del popover cuando el componente se desmonte
+        return () => {
+            popoverList.forEach(popover => popover.dispose());
+        };
+    }, []);
+
     return (
         <>
             <div className="files">
+                {/* <img src={bisonte} alt="Imagen de bisonte con un papel awwww" className="form-bg"/> */}
                 <div className="formData">
                     <input type="button" value="Guardar" className={`btn btn__save`} onClick={() => submitData()} />
                     {/* <input type="button" value="Llenar formularios" className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`}/> */}
                     <Link className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`} to={`/filesfill`}>Llenado de documentos <Icon icon={'arrow_forward'}></Icon></Link>
-                    {/*  ----------------- Validar nombre ----------------- */}
-                    <Input
-                        value={values.name}
-                        name={'name'}
-                        label={'Nombre completo'}
-                        type={'text'}
-                        handleChange={handleChange}
-                    ></Input>
-                    <ul className='validationList'>
-                        {validations.name === false ? (
-                            <div className="validationList__item">
-                                <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
 
-                    {/*  ----------------- Validar numero de control ----------------- */}
-                    <Input
-                        value={values.n_control}
+                    <div className="formData__section">
+
+                    </div>
+
+                    {/*  ----------------- Validar nombre ----------------- */}
+                    <InputText
+                        name={'name'}
+                        label={'Nombre'}
+                        placeholder={'Paterno - Materno - Nombres'}
+                        value={values.name}
+                        completed={validations.name}
+                        popover={true}
+                        popoverText="Apellido Paterno - Materno - Nombres"
+                        handleChange={handleChange}
+                    ></InputText>
+
+                    {/*  ----------------- Numero de control ----------------- */}
+                    <InputText
                         name={'n_control'}
+                        placeholder={'Numero de control'}
                         label={'Numero de control'}
-                        type={'number'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.n_control === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        value={values.n_control}
+                        completed={validations.n_control}
+                        popover={true}
+                        handleChange={handleChange}
+                        popoverText="Numero de control del estudiante"
+                    ></InputText>
 
                     {/*  ----------------- Validar direccion ----------------- */}
-                    <Input
-                        value={values.address}
+                    <InputText
                         name={'address'}
-                        label={'Dirección'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.address === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        placeholder={'Ej. Calle y numero - Colonia - Ciudad y estado'}
+                        label={'Dirección particular'}
+                        value={values.address}
+                        completed={validations.address}
+                        popover={true}
+                        popoverText="Calle y número - Colonia - Ciudad y estado"
+                        handleChange={handleChange}
+                    ></InputText>
 
                     {/*  ----------------- Validar edad ----------------- */}
-                    <Input
-                        value={values.age}
+                    <InputText
                         name={'age'}
+                        placeholder={'Ej. 24'}
                         label={'Edad'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.age === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        value={values.age}
+                        completed={validations.age}
+                        handleChange={handleChange}
+                    ></InputText>
 
                     {/*  ----------------- Validar teléfono ----------------- */}
-                    <Input
-                        value={values.tel}
+                    <InputText
                         name={'tel'}
-                        label={'Teléfono de casa'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.tel === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        handleChange={handleChange}
+                        label={'Telefono no celular'}
+                        placeholder={'Ej. 6141234567'}
+                        value={values.tel}
+                        completed={validations.tel}
+                    ></InputText>
 
                     {/*  ----------------- Validar telefono celular ----------------- */}
-                    <Input
-                        value={values.cel}
+                    <InputText
                         name={'cel'}
-                        label={'Teléfono celular'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.cel === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        handleChange={handleChange}
+                        label={'Telefono celular'}
+                        placeholder={'Ej. 6141234567'}
+                        value={values.cel}
+                        completed={validations.cel}
+                    ></InputText>
 
-                    {/*  ----------------- Validar carrera y semestre ----------------- */}
-                    <div className="formData__group">
-                        <div className="formData__block">
-                            <label className="formData__label" htmlFor="career">Carrera</label>
-                            <select className="formData__select" name="career" id="career" value={values.career} onChange={handleChange}>
-                                <option value="default">Selecciona una opcion</option>
-                                {careerarray.map((elem, index) => {
+                    {/* CARRERA Y SEMESTRE */}
+                    <div className="formdata__group mb-5p">
+                        <div className="formdata__options">
+                            <InputSelect
+                                name={'career'}
+                                handleChange={handleChange}
+                                label={'Carrera'}
+                                renderArray={careerarray.map((elem, index) => {
                                     return (
                                         <option key={index} value={careers[elem]}>{careers[elem]}</option>
                                     )
                                 })}
-                            </select>
-                        </div>
-                        <div className="formData__block">
-                            <label htmlFor="sem" className="formData__label">Semestre</label>
-                            <select className="formData__select" name="sem" id="sem" value={values.sem} onChange={handleChange}>
-                                {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                                {months.map((_elem, index) => {
+                                value={values.career}
+                                completed={validations.career}
+                            ></InputSelect>
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Semestre'}
+                                name={'sem'}
+                                renderArray={months.map((_elem, index) => {
                                     return <option key={index + 1} value={index + 1}>{index + 1}</option>
                                 })}
-                            </select>
+                                value={values.sem}
+                                completed={validations.sem}
+
+                            ></InputSelect>
                         </div>
                     </div>
-                    <ul className='validationList'>
-                        {(validations.career === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Existen campos vacíos</p>
-                            </div>
-                        ) : null}
-                    </ul>
 
                     {/*  ----------------- Validar nombre de la dependencia ----------------- */}
-                    <Input
-                        value={values.dependency_name}
-                        name={'dependency_name'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Nombre de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.dependency_name === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'dependency_name'}
+                        placeholder={'Ej. ITCH II'}
+                        value={values.dependency_name}
+                        completed={validations.dependency_name}
+                        popover={true}
+                        popoverText="Nombre completo de la dependencia donde se realiza el servicio social"
+                    ></InputText>
 
                     {/*  ----------------- Validar direccion de la dependencia ----------------- */}
-                    <Input
-                        value={values.dependency_address}
-                        name={'dependency_address'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Dirección de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.dependency_address === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'dependency_address'}
+                        placeholder={'Ej. ITCHII #12345, Colonia parque industrial'}
+                        value={values.dependency_address}
+                        completed={validations.dependency_address}
+                        popover={true}
+                        popoverText="Domicilio de la dependencia de realización (Calle - numero - Colonia)"
+                    ></InputText>
 
-                    {/*  ----------------- Validar telefono celular ----------------- */}
-                    <Input
-                        value={values.responsable_name}
+                    {/*  ----------------- Validar responsable celular ----------------- */}
+                    <InputText
+                        handleChange={handleChange}
+                        label={'Responsable del programa'}
                         name={'responsable_name'}
-                        label={'Nombre del responsable de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.responsable_name === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        placeholder={'Ej. Javier Lopez'}
+                        value={values.responsable_name}
+                        completed={validations.responsable_name}
+                        popover={true}
+                        popoverText="Nombre del responsable del programa o supervisor del servicio social del organismo"
+                    />
 
                     {/*  ----------------- Validar rol del responsable ----------------- */}
-                    <Input
-                        value={values.responsable_role}
+                    <InputText
+                        handleChange={handleChange}
+                        label={'Rol del responsable del programa'}
                         name={'responsable_role'}
-                        label={'Rol del responsable de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.responsable_role === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        placeholder={'Ej. Javier Lopez'}
+                        value={values.responsable_role}
+                        completed={validations.responsable_role}
+                        popover={true}
+                        popoverText="Puesto que desempeña el responsable del programa o supervisor del servicio social"
+                    />
 
                     {/*  ----------------- Validar fecha de inicio ----------------- */}
-                    <div className="formData__group">
-                        <div className="formData__block">
-                            <label className="formData__label" htmlFor="career">Dia de inicio</label>
-                            <Input
-                                value={values.s_d}
+                    <div className="formdata__group mb-5p">
+                        <div className="formdata__options">
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Dia de inicio'}
                                 name={'s_d'}
-                                type={'text'}
-                                handleChange={handleChange}>
-                            </Input>
-                        </div>
-                        <div className="formData__block">
-                            <label htmlFor="s_m" className="formData__label">Mes de inicio</label>
-                            <select className="formData__select" name="s_m" id="s_m" value={values.s_m} onChange={handleChange}>
-                                {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                                {months.map((_elem, index) => {
-                                    return <option key={index + 1} value={_elem}>{_elem}</option>
+                                renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
                                 })}
-                            </select>
-                        </div>
-                        <div className="formData__block">
-                            <label htmlFor="sem" className="formData__label">Año de inicio</label>
-                            <Input
-                                value={values.s_y}
+                                value={values.s_d}
+                                completed={validations.s_d}
+                            />
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Mes de inicio'}
+                                name={'s_m'}
+                                renderArray={months.map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
+                                })}
+                                value={values.s_m}
+                                completed={validations.s_m}
+                            />
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Año de inicio'}
                                 name={'s_y'}
-                                type={'text'}
-                                handleChange={handleChange}>
-                            </Input>
+                                renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
+                                })}
+                                value={values.s_y}
+                                completed={validations.s_y}
+                            />
                         </div>
                     </div>
-                    <ul className='validationList'>
-                        {(validations.s_d === false || validations.s_m === false || validations.s_y === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Existen campos vacíos</p>
-                            </div>
-                        ) : null}
-                    </ul>
 
                     {/*  ----------------- Validar fecha de finalización ----------------- */}
-                    {/* <p>Fecha de finalización</p> */}
-                    <div className="formData__group">
-                        <div className="formData__block">
-                            <label className="formData__label" htmlFor="career">Día de finalización</label>
-                            <Input
-                                value={values.e_d}
+                    <div className="formdata__group mb-5p">
+                        <div className="formdata__options">
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Dia de finalización'}
                                 name={'e_d'}
-                                type={'number'}
-                                handleChange={handleChange}>
-                            </Input>
-                        </div>
-                        <div className="formData__block">
-                            <label htmlFor="e_m" className="formData__label">Mes de finalización</label>
-                            <select className="formData__select" name="e_m" id="e_m" value={values.e_m} onChange={handleChange}>
-                                {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                                {months.map((_elem, index) => {
-                                    return <option key={index + 1} value={_elem}>{_elem}</option>
+                                renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
                                 })}
-                            </select>
-                        </div>
-                        <div className="formData__block">
-                            <label htmlFor="sem" className="formData__label">Año de finalización</label>
-                            <Input
-                                value={values.e_y}
+                                value={values.e_d}
+                                completed={validations.e_d}
+                            />
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Mes de finalización'}
+                                name={'e_m'}
+                                renderArray={months.map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
+                                })}
+                                value={values.e_m}
+                                completed={validations.e_m}
+                            />
+                            <InputSelect
+                                handleChange={handleChange}
+                                label={'Año de finalización'}
                                 name={'e_y'}
-                                type={'text'}
-                                handleChange={handleChange}>
-                            </Input>
+                                renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                                    return <option key={index} value={elem}>{elem}</option>
+                                })}
+                                value={values.e_y}
+                                completed={validations.e_y}
+                            />
                         </div>
                     </div>
-                    <ul className='validationList'>
-                        {(validations.e_d === false || validations.e_m === false || validations.e_y === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Existen campos vacíos</p>
-                            </div>
-                        ) : null}
-                    </ul>
 
                     {/*  ----------------- Validar nombre del titular ----------------- */}
-                    <Input
-                        value={values.titular_name}
-                        name={'titular_name'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Nombre del titular de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.titular_name === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'titular_name'}
+                        placeholder={'Ej. Javier Lopez'}
+                        value={values.titular_name}
+                        completed={validations.titular_name}
+                        popover={true}
+                        popoverText="Nombre completo de titular de la dependencia"
+                    />
 
                     {/*  ----------------- Validar rol del titular ----------------- */}
-                    <Input
-                        value={values.titular_role}
-                        name={'titular_role'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Rol del titular de la dependencia'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.titular_role === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'titular_role'}
+                        placeholder={'Ej. Jefe de laboratorio de cómputo'}
+                        value={values.titular_role}
+                        completed={validations.titular_role}
+                        popover={true}
+                        popoverText="Rol que desempeña de titular de la dependencia"
+                    />
 
                     {/*  ----------------- Validar nombre del programa----------------- */}
-                    <Input
-                        value={values.program_name}
-                        name={'program_name'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Nombre del programa'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.program_name === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'program_name'}
+                        placeholder={'Ej. Auxiliar de laboratorio de computo'}
+                        value={values.program_name}
+                        completed={validations.program_name}
+                        popover={true}
+                        popoverText="Este suele ser el puesto que tú como estudiante estará desempeñando en la dependencia"
+                    />
 
                     {/*  ----------------- Validar si es dentro de la institucion ----------------- */}
-                    <div className="formData__block">
-                        <label className="formData__label" htmlFor='inLocation'>Será dentro de la institución?</label>
-                        <select className="formData__select" value={values.inLocation} name="inLocation" id="inLocation" onChange={handleChange}>
-                            <option value="no">No</option>
-                            <option value="si">Sí</option>
-                        </select>
-                    </div>
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Es dentro de la institución?'}
+                        name={'inLocation'}
+                        renderArray={Array.from(['Si', 'No'], (elem, index) => { return <option key={index} value={elem}>{elem}</option> })}
+                        value={values.inLocation}
+                        completed={validations.inLocation}
+                    />
 
                     {/*  ----------------- Validar genero ----------------- */}
-                    <div className="formData__block">
-                        <label className="formData__label" htmlFor='gender'>Será dentro de la institución?</label>
-                        <select className="formData__select" value={values.gender} name="gender" id="gender" onChange={handleChange}>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                        </select>
-                    </div>
-                    <ul className='validationList'>
-                        {(validations.gender === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Genero'}
+                        name={'gender'}
+                        renderArray={Array.from(['Masculino', 'Femenino'], (elem, index) => { return <option key={index} value={elem}>{elem}</option> })}
+                        value={values.gender}
+                        completed={validations.gender}
+                    />
 
                     {/*  ----------------- Validar ubicación de la dependencia ----------------- */}
-                    <Input
-                        value={values.location_name}
-                        name={'location_name'}
+                    <InputText
+                        handleChange={handleChange}
                         label={'Nombre de realización del servicio'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                    <ul className='validationList'>
-                        {(validations.location_name === false) ? (
-                            <div className="validationList__item">
-                                <Icon icon={'cancel'} customIconClassName='warning'></Icon>
-                                <p>Campo vacío</p>
-                            </div>
-                        ) : null}
-                    </ul>
+                        name={'location_name'}
+                        placeholder={'Ej. Instituto Tecnológico de Chihuahua II'}
+                        value={values.location_name}
+                        completed={validations.location_name}
+                        popover={true}
+                        popoverText="Nombre del lugar de donde se va a realizar el servicio social"
+                    />
 
                 </div>
             </div>

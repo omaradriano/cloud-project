@@ -11,6 +11,7 @@ import Profile from "../Body/Profile.jsx";
 // import GenerateFile from "../Files/GenerateFile.jsx";
 import GeneralForm from "../Files/GeneralForm.jsx";
 import GenerateFile from "../Files/GenerateFile.jsx";
+import TestForm from "../Files/Templates/TestForm.jsx";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: "generalform", //Formulario general previo a la vista para descargar documentos
                 element: <ProtectedRoute><GeneralForm/></ProtectedRoute>,
+            },
+            {
+                path: "testform", //Formulario general previo a la vista para descargar documentos
+                element: <TestForm/>
             },
         ]
     },
