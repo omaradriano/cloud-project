@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { generateDocument } from "../../utils/forms_functions"
 
-const CartaCompromiso = ({ stateFunction, componentName, auth }) => {
+const CartaCompromiso = ({ componentName, auth }) => {
     return (
         <>
-            <p>Carta Compromiso</p>
             <div className={`dropdown`}>
                 <a className={`btn btn-secondary dropdown-toggle`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Descargar

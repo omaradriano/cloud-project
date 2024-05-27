@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { generateDocument, handleValidations, validateAll } from "../../utils/forms_functions";
 import Icon from "../../UtilComponents/Icon";
+import InputSelect from "../Components/InputSelect";
+import InputCheckbox from "../Components/InputCheckbox";
 
 const EvaluacionActividades = ({ stateFunction, componentName, auth }) => {
     //Valores que se utilizan en  el formulario de autoevaluacion cualitativa
@@ -45,35 +47,28 @@ const EvaluacionActividades = ({ stateFunction, componentName, auth }) => {
 
     return (
         <>
-            <p>Evaluacion de las actividades</p>
-            <div className="formData__group AUT_CUAL__custom">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="bimester">Bimestre</label>
-                    <select className="formData__select" name="bimester" id="bimester" onChange={handleChange}>
-                        <option value={''}>Selecciona una opcion</option>
-                        {/* Renderiza los semestres en el SELECT */}
-                        {semesterCounter.map((elem) => {
-                            return <option key={String(elem)} value={String(elem)}>{String(elem)}</option>
-                        })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="bimester">Final?</label>
-                    <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                    />
-                </div>
-            </div>
-            <ul className='validationList'>
-                {values.bimester === '' ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Seleccione un semestre</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputSelect
+                handleChange={handleChange}
+                label={'Bimestre de la evaluacion'}
+                name={'bimester'}
+                renderArray={semesterCounter.map((elem) => {
+                    return <option key={String(elem)} value={String(elem)}>{String(elem)}</option>
+                })}
+                value={values.bimester}
+                completed={validations.bimester}
+                popover={true}
+                popoverText="Este es el bimestre actual de la evaluacion"
+            />
+
+            {/* Evaluacion final? */}
+            <InputCheckbox
+                handleChange={handleCheckboxChange}
+                label='Es esta la ultima evaluacion?'
+                popover={true}
+                popoverText="Indicación si es la ultima evaluación"
+                isChecked={isChecked}
+            />
+
             <div className={`dropdown`}>
                 <a className={`btn btn-secondary dropdown-toggle ${!validations.bimester ? 'disabled' : ''}`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Descargar
