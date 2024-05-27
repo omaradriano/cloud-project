@@ -4,6 +4,9 @@ import Input from "../Components/Input"
 import { months } from "../../utils/some_aux"
 import Icon from "../../UtilComponents/Icon"
 import { serverDomain } from "../../config"
+import InputSelect from "../Components/InputSelect"
+import InputTextarea from "../Components/InputTextarea"
+import InputText from "../Components/InputText"
 
 const PlanTrabajo = ({ componentName, auth }) => {
     //Valores que se utilizan en  el formulario de autoevaluacion cualitativa
@@ -75,7 +78,7 @@ const PlanTrabajo = ({ componentName, auth }) => {
         let fileData = JSON.parse(localStorage.getItem('generalUserData'))
         // console.log(fileData);
         if (fileData.files) {
-            if(fileData.files[componentName]){
+            if (fileData.files[componentName]) {
                 setValues({ ...fileData.files[componentName] })
             }
         }
@@ -88,256 +91,219 @@ const PlanTrabajo = ({ componentName, auth }) => {
     }, [values])
     return (
         <>
-            <p>PlanTrabajo</p>
-
             {/*  ----------------- Validar primer periodo ----------------- */}
-            <div className="formData__group">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="p_1_d">Dia de inicio del 1er periodo</label>
-                    <Input
-                        value={values.p_1_d}
+            <div className="formdata__group mb-5p">
+                <h4>Primer periodo</h4>
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Dia de inicio'}
                         name={'p_1_d'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_1_m" className="formData__label">Mes de inicio del 1er periodo</label>
-                    <select className="formData__select" name="p_1_m" id="p_1_m" value={values.p_1_m} onChange={handleChange}>
-                        {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                        {months.map((_elem, index) => {
-                            return <option key={index + 1} value={_elem}>{_elem}</option>
+                        renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
                         })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_1_y" className="formData__label">Año de inicio del 1er periodo</label>
-                    <Input
-                        value={values.p_1_y}
+                        value={values.p_1_d}
+                        completed={validations.p_1_d}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Mes de inicio'}
+                        name={'p_1_m'}
+                        renderArray={months.map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_1_m}
+                        completed={validations.p_1_m}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Año de inicio'}
                         name={'p_1_y'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
+                        renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_1_y}
+                        completed={validations.p_1_y}
+                    />
                 </div>
             </div>
-            <ul className='validationList'>
-                {validations.p_1_d === false || validations.p_1_m === false || validations.p_1_y === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
             {/*  ----------------- Actividades del primer periodo ----------------- */}
-            <div className="formData__block">
-                <label htmlFor="p_1_activities" className="formData__label">Actividades a realizar en el periodo</label>
-                <textarea onChange={handleChange} name="p_1_activities" id="p_1_activities" maxLength={150} value={values.p_1_activities}></textarea>
-            </div>
-            <ul className='validationList'>
-                {validations.p_1_activities === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputTextarea
+                handleChange={handleChange}
+                label='Actividades a realizar en el periodo'
+                maxLength={150}
+                name='p_1_activities'
+                placeholder={'Ej. descripción de actividades'}
+                value={values.p_1_activities}
+                completed={validations.p_1_activities}
+            />
             {/*  ----------------- Gente beneficiada del primer periodo ----------------- */}
-            <div className="formData__block">
-                <label className="formData__label" htmlFor="career">Cantidad de personas beneficiadas en el 1er periodo</label>
-                <Input
-                    value={values.p_1_people}
-                    name={'p_1_people'}
-                    type={'text'}
-                    handleChange={handleChange}>
-                </Input>
-            </div>
-            <ul className='validationList'>
-                {validations.p_1_people === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputText
+                handleChange={handleChange}
+                label='Personas beneficiadas'
+                name={'p_1_people'}
+                placeholder={'Ej. 126'}
+                value={values.p_1_people}
+                completed={validations.p_1_people}
+                popover={true}
+                popoverText="Cantidad de personas que son beneficiadas gracias a las acciones del prestador de servicio social"
+            />
+
 
             {/*  ----------------- Validar segundo periodo ----------------- */}
-            <div className="formData__group">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="p_2_d">Dia de inicio del 2do periodo</label>
-                    <Input
-                        value={values.p_2_d}
+            <div className="formdata__group mb-5p">
+                <h4>Segundo periodo</h4>
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Dia de inicio'}
                         name={'p_2_d'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_2_m" className="formData__label">Mes de inicio del 2do periodo</label>
-                    <select className="formData__select" name="p_2_m" id="p_2_m" value={values.p_2_m} onChange={handleChange}>
-                        {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                        {months.map((_elem, index) => {
-                            return <option key={index + 1} value={_elem}>{_elem}</option>
+                        renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
                         })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_2_y" className="formData__label">Año de inicio del 2do periodo</label>
-                    <Input
-                        value={values.p_2_y}
+                        value={values.p_2_d}
+                        completed={validations.p_2_d}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Mes de inicio'}
+                        name={'p_2_m'}
+                        renderArray={months.map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_2_m}
+                        completed={validations.p_2_m}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Año de inicio'}
                         name={'p_2_y'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
+                        renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_2_y}
+                        completed={validations.p_2_y}
+                    />
                 </div>
             </div>
-            <ul className='validationList'>
-                {validations.p_2_d === false || validations.p_2_m === false || validations.p_2_y === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
             {/*  ----------------- Actividades del segundo periodo ----------------- */}
-            <div className="formData__block">
-                <label htmlFor="p_2_activities" className="formData__label">Actividades a realizar en el periodo</label>
-                <textarea onChange={handleChange} name="p_2_activities" id="p_2_activities" maxLength={150} value={values.p_2_activities}></textarea>
-            </div>
-            <ul className='validationList'>
-                {validations.p_2_activities === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
-            {/*  ----------------- Gente beneficiada del primer periodo ----------------- */}
-            <div className="formData__block">
-                <label className="formData__label" htmlFor="career">Cantidad de personas beneficiadas en el 2do periodo</label>
-                <Input
-                    value={values.p_2_people}
-                    name={'p_2_people'}
-                    type={'text'}
-                    handleChange={handleChange}>
-                </Input>
-            </div>
-            <ul className='validationList'>
-                {validations.p_2_people === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputTextarea
+                handleChange={handleChange}
+                label='Actividades a realizar en el periodo'
+                maxLength={150}
+                name='p_2_activities'
+                placeholder={'Ej. descripción de actividades'}
+                value={values.p_2_activities}
+                completed={validations.p_2_activities}
+            />
+            {/*  ----------------- Gente beneficiada del segundo periodo ----------------- */}
+            <InputText
+                handleChange={handleChange}
+                label='Personas beneficiadas'
+                name={'p_2_people'}
+                placeholder={'Ej. 126'}
+                value={values.p_2_people}
+                completed={validations.p_2_people}
+                popover={true}
+                popoverText="Cantidad de personas que son beneficiadas gracias a las acciones del prestador de servicio social"
+            />
+
+
 
             {/*  ----------------- Validar tercer periodo ----------------- */}
-            <div className="formData__group">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="p_3_d">Dia de inicio del 3er periodo</label>
-                    <Input
-                        value={values.p_3_d}
+            <div className="formdata__group mb-5p">
+                <h4>Tercer periodo</h4>
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Dia de inicio'}
                         name={'p_3_d'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_3_m" className="formData__label">Mes de inicio del 3er periodo</label>
-                    <select className="formData__select" name="p_3_m" id="p_3_m" value={values.p_3_m} onChange={handleChange}>
-                        {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                        {months.map((_elem, index) => {
-                            return <option key={index + 1} value={_elem}>{_elem}</option>
+                        renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
                         })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="p_3_y" className="formData__label">Año de inicio del 3er periodo</label>
-                    <Input
-                        value={values.p_3_y}
+                        value={values.p_3_d}
+                        completed={validations.p_3_d}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Mes de inicio'}
+                        name={'p_3_m'}
+                        renderArray={months.map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_3_m}
+                        completed={validations.p_3_m}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Año de inicio'}
                         name={'p_3_y'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
+                        renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.p_3_y}
+                        completed={validations.p_3_y}
+                    />
                 </div>
             </div>
-            <ul className='validationList'>
-                {validations.p_3_d === false || validations.p_3_m === false || validations.p_3_y === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
-            {/*  ----------------- Actividades del segundo periodo ----------------- */}
-            <div className="formData__block">
-                <label htmlFor="p_3_activities" className="formData__label">Actividades a realizar en el periodo</label>
-                <textarea onChange={handleChange} name="p_3_activities" id="p_3_activities" maxLength={150} value={values.p_3_activities}></textarea>
-            </div>
-            <ul className='validationList'>
-                {validations.p_3_activities === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
-            {/*  ----------------- Gente beneficiada del primer periodo ----------------- */}
-            <div className="formData__block">
-                <label className="formData__label" htmlFor="p_3_people">Cantidad de personas beneficiadas en el 3er periodo</label>
-                <Input
-                    value={values.p_3_people}
-                    name={'p_3_people'}
-                    type={'text'}
-                    handleChange={handleChange}>
-                </Input>
-            </div>
-            <ul className='validationList'>
-                {validations.p_3_people === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
+            {/*  ----------------- Actividades del tercer periodo ----------------- */}
+            <InputTextarea
+                handleChange={handleChange}
+                label='Actividades a realizar en el periodo'
+                maxLength={150}
+                name='p_3_activities'
+                placeholder={'Ej. descripción de actividades'}
+                value={values.p_3_activities}
+                completed={validations.p_3_activities}
+            />
+            {/*  ----------------- Gente beneficiada del tercer periodo ----------------- */}
+            <InputText
+                handleChange={handleChange}
+                label='Personas beneficiadas'
+                name={'p_3_people'}
+                placeholder={'Ej. 126'}
+                value={values.p_3_people}
+                completed={validations.p_3_people}
+                popover={true}
+                popoverText="Cantidad de personas que son beneficiadas gracias a las acciones del prestador de servicio social"
+            />
 
             {/*  ----------------- Validar fin del servicio social ----------------- */}
-            <div className="formData__group">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="fp_d">Dia de finalización</label>
-                    <Input
-                        value={values.fp_d}
+            <div className="formdata__group mb-5p">
+                <h4>Fin de servicio</h4>
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Dia de fin'}
                         name={'fp_d'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="fp_m" className="formData__label">Mes de finalización</label>
-                    <select className="formData__select" name="fp_m" id="fp_m" value={values.fp_m} onChange={handleChange}>
-                        {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                        {months.map((_elem, index) => {
-                            return <option key={index + 1} value={_elem}>{_elem}</option>
+                        renderArray={Array.from({ length: 31 }, (_, index) => { return index + 1 }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
                         })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label htmlFor="fp_y" className="formData__label">Año de finalización</label>
-                    <Input
-                        value={values.fp_y}
+                        value={values.fp_d}
+                        completed={validations.fp_d}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Mes de fin'}
+                        name={'fp_m'}
+                        renderArray={months.map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.fp_m}
+                        completed={validations.fp_m}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Año de fin'}
                         name={'fp_y'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
+                        renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
+                        value={values.fp_y}
+                        completed={validations.fp_y}
+                    />
                 </div>
             </div>
-            <ul className='validationList'>
-                {validations.fp_d === false || validations.fp_m === false || validations.fp_y === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Existen campos vacíos</p>
-                    </div>
-                ) : null}
-            </ul>
 
             <div className={`dropdown`}>
                 {/* ${!validations.bimester ? 'disabled' : ''} */}
@@ -346,8 +312,8 @@ const PlanTrabajo = ({ componentName, auth }) => {
                 </a>
 
                 <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'pdf', auth, {...values})}>PDF</a></li>
-                    <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'docx', auth, {...values})}>DOCX</a></li>
+                    <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'pdf', auth, { ...values })}>PDF</a></li>
+                    <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'docx', auth, { ...values })}>DOCX</a></li>
                 </ul>
             </div>
             <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />

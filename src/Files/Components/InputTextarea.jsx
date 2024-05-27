@@ -11,11 +11,11 @@ const InputTextarea = ({ name, label, value, placeholder, completed = false, pop
                             <Icon icon={'help'}></Icon>
                         </span>} </label>
                 <textarea onChange={handleChange} name={name} id={name} maxLength={maxLength} value={value} placeholder={placeholder}></textarea>
-                {!completed &&
+                {/* {!completed &&
                     <div className="conditions">
                         <Icon icon={'priority_high'}></Icon>
                         <p>Campo vacío</p>
-                    </div>}
+                    </div>} */}
             </div>
         </>
     )

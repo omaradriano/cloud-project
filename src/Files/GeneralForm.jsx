@@ -35,10 +35,10 @@ const GeneralForm = () => {
         responsable_name: '',
         responsable_role: '',
         s_d: '', //start day
-        s_m: 'Enero', //end day
+        s_m: '', //end day
         s_y: '', //actual day
         e_d: '', //start month
-        e_m: 'Enero', //end month
+        e_m: '', //end month
         e_y: '', //actual month
         a_d: '', //start year
         a_m: '', //end year
@@ -91,8 +91,8 @@ const GeneralForm = () => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
     }, [values, validations])
 

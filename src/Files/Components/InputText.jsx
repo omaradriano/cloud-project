@@ -11,11 +11,11 @@ const InputText = ({ name,label, value, placeholder, completed = false, popover 
                             <Icon icon={'help'}></Icon>
                         </span>} </label>
                 <input type="text" id={name} name={name} placeholder={placeholder} value={value} onChange={handleChange} />
-                {!completed &&
+                {/* {!completed &&
                     <div className="conditions">
                         <Icon icon={'priority_high'}></Icon>
                         <p>Campo vacío</p>
-                    </div>}
+                    </div>} */}
             </div>
         </>
     )

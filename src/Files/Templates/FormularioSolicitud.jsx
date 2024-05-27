@@ -14,7 +14,7 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
     const [values, setValues] = useState({
         service_period: '',
         service_year: '',
-        service_sem: '1',
+        service_sem: '',
         modality: '',
         activities: '',
         activity_type: ''
@@ -69,8 +69,8 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         program_typeOnChange(values.activity_type)
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);

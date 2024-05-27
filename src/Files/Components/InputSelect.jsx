@@ -12,11 +12,11 @@ const InputSelect = ({ name, label, value, completed = false, popover = false, p
                     <option value={''}>Selecciona una opcion</option>
                     {renderArray}
                 </select>
-                {!completed &&
+                {/* {!completed &&
                     <div className="conditions">
                         <Icon icon={'priority_high'}></Icon>
                         <p>Campo vacío</p>
-                    </div>}
+                    </div>} */}
             </div>
         </>
     )

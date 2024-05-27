@@ -1124,6 +1124,9 @@ h6 {
 .state-warning > select, .state-warning > input {
     border: 2px solid orange;
 }
+.state-warning > textarea, .state-warning > textarea {
+    border: 2px solid orange;
+}
 .state-warning > .conditions > p {
     color: orange;
 }
