@@ -64,8 +64,8 @@ const CartaAsignacion = ({ componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         checkOptionsOnChange(values.activity_type)
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
@@ -148,6 +148,7 @@ const CartaAsignacion = ({ componentName, auth }) => {
                     }}
                 popover={true}
                 popoverText="Tipo de actividad a desarrollar durante el servicio social"
+                keyword='cartaasignacion'
             />
 
             <div className={`dropdown`}>

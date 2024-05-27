@@ -1,6 +1,6 @@
 import Icon from "../../UtilComponents/Icon"
 
-const InputRadios = ({ name, label, value, completed = false, popover = false, popoverText = 'Texto de ayuda', handleChange, options = {} }) => {
+const InputRadios = ({ name, label, value, completed = false, popover = false, popoverText = 'Texto de ayuda', handleChange, options = {}, keyword }) => {
 
     const { optionValues, optionKeys } = options
 
@@ -18,11 +18,11 @@ const InputRadios = ({ name, label, value, completed = false, popover = false, p
                                 <input className="form-check-input"
                                     type="radio"
                                     name={name}
-                                    id={`name_${index}`}
+                                    id={`name_${index+1}${keyword}`}
                                     checked={value === optionKeys[index]}
                                     onChange={handleChange} 
                                     value={optionKeys[index]}/>
-                                <label className="form-check-label" htmlFor={`name_${index}`}>
+                                <label className="form-check-label" htmlFor={`name_${index+1}${keyword}`}>
                                     {elem}
                                 </label>
                             </div>

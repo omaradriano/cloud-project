@@ -4,6 +4,9 @@ import Input from "../Components/Input";
 import { months } from "../../utils/some_aux";
 import { serverDomain } from "../../config";
 import Icon from "../../UtilComponents/Icon";
+import InputSelect from "../Components/InputSelect";
+import InputTextarea from "../Components/InputTextarea";
+import InputRadios from "../Components/InputRadios";
 
 const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
 
@@ -66,8 +69,8 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        // console.log(values);
-        // console.log('Validations ', validations);
+        console.log(values);
+        console.log('Validations ', validations);
         program_typeOnChange(values.activity_type)
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
@@ -79,7 +82,7 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
         let fileData = JSON.parse(localStorage.getItem('generalUserData'))
         // console.log(fileData);
         if (fileData.files) {
-            if(fileData.files[componentName]){
+            if (fileData.files[componentName]) {
                 setValues({ ...fileData.files[componentName] })
             }
         }
@@ -92,94 +95,89 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
 
     return (
         <>
-            <p>Formulario de solicitud</p>
             {/*  ----------------- Periodo ----------------- */}
             <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
 
-            <div className="formData__block">
-                <label className="formData__label" htmlFor="service_period">Periodo</label>
-                <select className="formData__select" name="service_period" id="service_period" value={values.service_period} onChange={handleChange}>
-                    <option value={''}>Selecciona una opcion</option>
-                    {/* Renderiza los semestres en el SELECT */}
-                    <option value={'ENERO-JUNIO'}>ENERO-JUNIO</option>
-                    <option value={'AGOSTO-DICIEMBRE'}>AGOSTO-DICIEMBRE</option>
-                </select>
-            </div>
-            <ul className='validationList'>
-                {validations.service_period === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            {/* Periodo del servicio */}
+            <InputSelect
+                handleChange={handleChange}
+                label='Periodo'
+                name='service_period'
+                renderArray={['ENERO-JUNIO', 'AGOSTO-DICIEMBRE'].map((elem, index) => {
+                    return <option key={index} value={elem}>{elem}</option>
+                })}
+                value={values.service_period}
+                completed={validations.service_period}
+                popover={true}
+                popoverText="Periodo en el que se realizará el servicio social"
+            />
 
-            <div className="formData__group">
-                {/*  ----------------- Año de realizacion de servicio ----------------- */}
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="service_year">Año de realización de servicio</label>
-                    <Input
+            {/*  ----------------- Año de realizacion de servicio ----------------- */}
+            <div className="formdata__group mb-5p">
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label='Año de servicio'
+                        name='service_year'
+                        renderArray={Array.from({ length: 10 }, (_, index) => { return index + Number(new Date().getFullYear()) }).map((elem, index) => {
+                            return <option key={index} value={elem}>{elem}</option>
+                        })}
                         value={values.service_year}
-                        name={'service_year'}
-                        type={'text'}
-                        handleChange={handleChange}>
-                    </Input>
-                </div>
-
-                {/*  ----------------- Semestre de realizacion de servicio social ----------------- */}
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="service_sem">Semestre de realización de servicio</label>
-                    <select className="formData__select" name="service_sem" id="service_sem" value={values.service_sem} onChange={handleChange}>
-                        {/* Solo por que la cantidad de semestres es igual a la cantidad de meses pero no deberia de estar así */}
-                        {months.map((_elem, index) => {
+                        completed={validations.service_year}
+                    />
+                    <InputSelect
+                        handleChange={handleChange}
+                        label='Semestre de servicio'
+                        name='service_sem'
+                        renderArray={months.map((_elem, index) => {
                             return <option key={index + 1} value={index + 1}>{index + 1}</option>
                         })}
-                    </select>
+                        value={values.service_sem}
+                        completed={validations.service_sem}
+                    />
                 </div>
             </div>
-            <ul className='validationList'>
-                {validations.service_sem === false || validations.service_year === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
 
             {/*  ----------------- Actividades a realizar a lo largo del servicio social ----------------- */}
-            <div className="formData__block">
-                <label htmlFor="activities" className="formData__label">Actividades a realizar en el periodo</label>
-                <textarea onChange={handleChange} name="activities" id="activities" maxLength={500} value={values.activities}></textarea>
-            </div>
-            <ul className='validationList'>
-                {validations.activities === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputTextarea
+                handleChange={handleChange}
+                label='Actividades a realizar en el periodo'
+                maxLength={500}
+                name='activities'
+                placeholder='Ej. descripcion de las actividades durante el semestre'
+                value={values.activities}
+                completed={validations.activities}
+            />
 
             {/*  ----------------- Modalidad ----------------- */}
-            <div className="formData__block">
-                <label className="formData__label" htmlFor="modality">Modalidad</label>
-                <select className="formData__select" name="modality" id="modality" value={values.modality} onChange={handleChange}>
-                    <option value={''}>Selecciona una opcion</option>
-                    {/* Renderiza los semestres en el SELECT */}
-                    <option value={'INTERNA'}>INTERNA</option>
-                    <option value={'EXTERNA'}>EXTERNA</option>
-                </select>
-            </div>
-            <ul className='validationList'>
-                {validations.modality === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            <InputSelect
+                handleChange={handleChange}
+                label='Modalidad'
+                name='modality'
+                renderArray={['INTERNA', 'EXTERNA'].map((elem, index) => {
+                    return <option key={index} value={elem}>{elem}</option>
+                })}
+                value={values.modality}
+                completed={validations.modality}
+                popover={true}
+                popoverText="Esta opción define si se va a realizar el servicio social dentro o fuera de la institución"
+            />
 
-            <div className="formData__group--list">
+            {/* Tipo de programa */}
+            <InputRadios
+                handleChange={handleChange}
+                options={{
+                    optionValues: ['Educacion para adultos', 'Actividades cívicas', 'Desarrollo sustentable', 'Desarrollo de comunidad', 'Actividades culturales','Apoyo a la salud','Actividades deportivas','Medio ambiente','Otros'],
+                    optionKeys: ['t_1','t_2','t_3','t_4','t_5','t_6','t_7','t_8','t_9',]
+                }}
+                label='Tipo de programa'
+                name={'activity_type'}
+                value={values.activity_type}
+                completed={validations.activity_type}
+                keyword='formulariosolicitud'
+                
+            />
+            {/* <div className="formData__group--list">
                 <label className="formData__label">Tipo de programa</label>
                 <div className="formData__block formData__block--list">
                     <input
@@ -315,7 +313,7 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
                         <p>Selecciona una opción</p>
                     </div>
                 ) : null}
-            </ul>
+            </ul> */}
 
             <div className={`dropdown`}>
                 <a className={`btn btn-secondary dropdown-toggle ${!validationsCompleted ? 'disabled' : ''}`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

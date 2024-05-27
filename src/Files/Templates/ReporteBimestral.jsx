@@ -51,8 +51,8 @@ const ReporteBimestral = ({ componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
     }, [values, validations])

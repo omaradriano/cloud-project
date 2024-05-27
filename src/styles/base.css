@@ -807,6 +807,9 @@ input[type='number'] {
     /* min-height: 550px; */
     /* max-height: 70vh; */
     /* flex-wrap: wrap; */
+    background-color: var(--input-color);
+    padding: 10px 10px;
+    border-radius: 10px;
 }
 
 .formData__group {
@@ -1112,8 +1115,7 @@ h6 {
     border-radius: 5px;
     border: none;
     /* border: 0.8px solid rgb(82, 82, 82); */
-    /* background-color: var(--bg-body-color); */
-    
+    background-color: var(--bg-body-color);
 }
 
 .state-warning > select, .state-warning > input {
