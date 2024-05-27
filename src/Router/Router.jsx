@@ -40,10 +40,10 @@ const router = createBrowserRouter([
                 path: "generalform", //Formulario general previo a la vista para descargar documentos
                 element: <ProtectedRoute><GeneralForm/></ProtectedRoute>,
             },
-            {
-                path: "testform", //Formulario general previo a la vista para descargar documentos
-                element: <TestForm/>
-            },
+            // {
+            //     path: "testform", //Formulario general previo a la vista para descargar documentos
+            //     element: <TestForm/>
+            // },
         ]
     },
 ]);
