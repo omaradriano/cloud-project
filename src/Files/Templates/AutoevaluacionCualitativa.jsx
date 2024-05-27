@@ -29,8 +29,8 @@ const AutoevaluacionCualitativa = ({ stateFunction, componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        console.log(values);
-        console.log('Validations ', validations);
+        // console.log(values);
+        // console.log('Validations ', validations);
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         validateAll(validations) ? stateFunction(true) : stateFunction(false);
     }, [values, validations])
@@ -48,24 +48,20 @@ const AutoevaluacionCualitativa = ({ stateFunction, componentName, auth }) => {
 
     return (
         <>
-            <div className="formdata__group mb-5p">
-                <div className="formdata__options">
-                    <InputSelect
-                        handleChange={handleChange}
-                        label={'Bimestre de la evaluacion'}
-                        name={'bimester'}
-                        renderArray={semesterCounter.map((elem) => {
-                            return <option key={String(elem)} value={String(elem)}>{String(elem)}</option>
-                        })}
-                        value={values.bimester}
-                        completed={validations.bimester}
-                        popover={true}
-                        popoverText="Este es el bimestre actual de la evaluacion"
-                    />
-                </div>
-            </div>
+            <InputSelect
+                handleChange={handleChange}
+                label={'Bimestre de la evaluacion'}
+                name={'bimester'}
+                renderArray={semesterCounter.map((elem) => {
+                    return <option key={String(elem)} value={String(elem)}>{String(elem)}</option>
+                })}
+                value={values.bimester}
+                completed={validations.bimester}
+                popover={true}
+                popoverText="Este es el bimestre actual de la evaluacion"
+            />
 
-             {/* Evaluacion final? */}
+            {/* Evaluacion final? */}
             <InputCheckbox
                 handleChange={handleCheckboxChange}
                 label='Es esta la ultima evaluacion?'
