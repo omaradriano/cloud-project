@@ -4,8 +4,11 @@ import Icon from "../../UtilComponents/Icon";
 import Input from "../Components/Input";
 import { AuthContext } from "../../Context/Context";
 import { serverDomain } from "../../config";
+import InputRadios from "../Components/InputRadios";
+import InputText from "../Components/InputText";
+import InputTextarea from "../Components/InputTextarea";
 
-const CartaAsignacion = ({ stateFunction, componentName, auth, validationsCompleted }) => {
+const CartaAsignacion = ({ componentName, auth }) => {
 
     let checkOptions = {
         act_t_1: '',
@@ -14,6 +17,8 @@ const CartaAsignacion = ({ stateFunction, componentName, auth, validationsComple
         act_t_4: '',
         act_t_5: '',
     }
+
+    const [validationsCompleted, setValidationsCompleted] = useState(false)
 
     function checkOptionsOnChange(selectedValue) {
         let checkOptionsKeys = Object.keys(checkOptions)
@@ -59,11 +64,11 @@ const CartaAsignacion = ({ stateFunction, componentName, auth, validationsComple
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        // console.log(values);
-        // console.log('Validations ', validations);
+        console.log(values);
+        console.log('Validations ', validations);
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         checkOptionsOnChange(values.activity_type)
-        validateAll(validations) ? stateFunction(true) : stateFunction(false);
+        validateAll(validations) ? setValidationsCompleted(true) : setValidationsCompleted(false);
     }, [values, validations])
 
     useEffect(() => {
@@ -76,7 +81,7 @@ const CartaAsignacion = ({ stateFunction, componentName, auth, validationsComple
         let fileData = JSON.parse(localStorage.getItem('generalUserData'))
         // console.log(fileData);
         if (fileData.files) {
-            if(fileData.files[componentName]){
+            if (fileData.files[componentName]) {
                 setValues({ ...fileData.files[componentName] })
             }
         }
@@ -86,124 +91,69 @@ const CartaAsignacion = ({ stateFunction, componentName, auth, validationsComple
         <>
             <h5>Carta de Asignación</h5>
             <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
-            <div className="formData__block">
-                <Input maxLength={35} label={'Creditos aprobados'} name={'credits'} type={'text'} value={values.credits} key={'credits'} handleChange={handleChange}></Input>
-            </div>
-            <ul className='validationList'>
-                {validations.credits === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Ingrese cantidad de creditos</p>
-                    </div>
-                ) : null}
-            </ul>
 
-            <div className="formData__block">
-                <label htmlFor="objetive" className="formData__label">Objetivo</label>
-                <textarea onChange={handleChange} name="objetive" id="objetive" maxLength={350} value={values.objetive}></textarea>
-            </div>
-            <ul className='validationList'>
-                {validations.objetive === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            {/* Creditos aprobados */}
+            <InputText
+                handleChange={handleChange}
+                label={'Creditos aprobados'}
+                name={'credits'}
+                placeholder='Ej. 172'
+                value={values.credits}
+                completed={validations.credits}
+                popover={true}
+                popoverText="Cantidad de creditos cursados + cantidad de creditos en el semestre. Ej. 170 acumulados + 22 semestre actual"
+            />
 
-            <h6>Actividades a desarrollar</h6>
-            <Input label={'Actividad 1'} type={'text'} name={'act_1'} value={values.act_1} handleChange={handleChange} maxlength={35}></Input>
-            <ul className='validationList'>
-                {validations.act_1 === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
+            {/* Objetivo de la realizacion del servicio */}
+            <InputTextarea
+                handleChange={handleChange}
+                label={'Objetivo'}
+                maxLength={350}
+                name={'objetive'}
+                placeholder={'Objetivo de la realización del servicio social'}
+                value={values.objetive}
+                completed={validations.objetive}
+                popover={true}
+                popoverText="Indicar el objetivo del programa de servicio social a desarrollar en la dependencia u organismo"
+            />
 
-            <Input label={'Actividad 2'} type={'text'} name={'act_2'} value={values.act_2} handleChange={handleChange} maxlength={35}></Input>
-            <ul className='validationList'>
-                {validations.act_2 === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
-            <Input label={'Actividad 3'} type={'text'} name={'act_3'} value={values.act_3} handleChange={handleChange} maxlength={35}></Input>
-            <ul className='validationList'>
-                {validations.act_3 === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
-            <Input label={'Actividad 4'} type={'text'} name={'act_4'} value={values.act_4} handleChange={handleChange} maxlength={35}></Input>
-            <ul className='validationList'>
-                {validations.act_4 === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
-            <Input label={'Actividad 5'} type={'text'} name={'act_5'} value={values.act_5} handleChange={handleChange} maxlength={35}></Input>
-            <ul className='validationList'>
-                {validations.act_5 === false ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Campo vacío</p>
-                    </div>
-                ) : null}
-            </ul>
 
-            <h6>Tipo de actividad a desarrollar</h6>
-            <div className="formData__block formData__block--list">
-                <input checked={values.activity_type === 'act_t_1'} className="form-check-input" type="radio" name="activity_type" id="flexRadioDefault1" value='act_t_1' onChange={handleChange} />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                    TECNICAS
-                </label>
-            </div>
-            <div className="formData__block formData__block--list">
-                <input checked={values.activity_type === 'act_t_2'} className="form-check-input" type="radio" name="activity_type" id="flexRadioDefault2" value='act_t_2' onChange={handleChange} />
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
-                    ASESORIA
-                </label>
-            </div>
-            <div className="formData__block formData__block--list">
-                <input checked={values.activity_type === 'act_t_3'} className="form-check-input" type="radio" name="activity_type" id="flexRadioDefault3" value='act_t_3' onChange={handleChange} />
-                <label className="form-check-label" htmlFor="flexRadioDefault3">
-                    INVESTIGACION
-                </label>
-            </div>
-            <div className="formData__block formData__block--list">
-                <input checked={values.activity_type === 'act_t_4'} className="form-check-input" type="radio" name="activity_type" id="flexRadioDefault4" value='act_t_4' onChange={handleChange} />
-                <label className="form-check-label" htmlFor="flexRadioDefault4">
-                    DOCENTES
-                </label>
-            </div>
-            <div className="formData__block formData__block--list">
-                <input checked={values.activity_type === 'act_t_5'} className="form-check-input" type="radio" name="activity_type" id="flexRadioDefault5" value='act_t_5' onChange={handleChange} />
-                <label className="form-check-label" htmlFor="flexRadioDefault5">
-                    OTRAS
-                </label>
-            </div>
-            <ul className='validationList'>
-                {Object.keys(checkOptions).some(elem => { checkOptions[elem].length > 0 }) ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Seleciona una opción</p>
-                    </div>
-                ) : null}
-            </ul>
+            <h5>Actividades a desarrollar</h5>
+            {/* {[{ description: 'Actividad 1', name: 'act_1' }]} */}
+            {Array.from({ length: 5 }, (_, index) => {
+                return index + 1
+            }).map((elem) => {
+                return <InputText
+                    key={elem}
+                    handleChange={handleChange}
+                    label={`Actividad ${elem}`}
+                    name={`act_${elem}`}
+                    placeholder={`Ej. de actividad ${elem}`}
+                    value={values[`act_${elem}`]}
+                    completed={validations[`act_${elem}`]}
+                />
+            })}
+
+            {/* Tipo de actividad a desarrollar */}
+            <InputRadios
+                handleChange={handleChange}
+                label={'Tipo de actividad a desarrollar'}
+                name={'activity_type'}
+                value={values.activity_type}
+                completed={validations.activity_type}
+                options={
+                    {
+                        optionValues: ['TÉCNICAS', 'ASESORIA', 'INVESTIGACION', 'DOCENTES', 'OTRAS'],
+                        optionKeys: ['act_t_1', 'act_t_2', 'act_t_3', 'act_t_4', 'act_t_5',]
+                    }}
+                popover={true}
+                popoverText="Tipo de actividad a desarrollar durante el servicio social"
+            />
 
             <div className={`dropdown`}>
                 <a className={`btn btn-secondary dropdown-toggle ${!validationsCompleted ? 'disabled' : ''}`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Descargar
                 </a>
-
                 <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="#" onClick={() => {
                         generateDocument(componentName, 'pdf', auth, { ...temporal, ...checkOptions })
