@@ -3,7 +3,7 @@ import Icon from "../../UtilComponents/Icon"
 const InputSelect = ({ name, label, value, completed = false, popover = false, popoverText = 'Texto de ayuda', handleChange, renderArray }) => {
     return (
         <>
-            <div className={`form__select ${!completed ? 'state-warning':''}`}>
+            <div className={`form__select mb-p5 ${!completed ? 'state-warning':''}`}>
                 <label htmlFor="select_test" className="">{label}
                     {popover && <span className="d-inline-block" tabIndex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content={popoverText}>
                         <Icon icon={'help'}></Icon>
