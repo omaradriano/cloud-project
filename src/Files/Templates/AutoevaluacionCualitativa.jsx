@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import Icon from "../../UtilComponents/Icon"
 import { generateDocument, handleValidations, validateAll } from "../../utils/forms_functions"
+import InputSelect from "../Components/InputSelect"
+import InputCheckbox from "../Components/InputCheckbox"
 
 const AutoevaluacionCualitativa = ({ stateFunction, componentName, auth }) => {
 
@@ -27,8 +29,8 @@ const AutoevaluacionCualitativa = ({ stateFunction, componentName, auth }) => {
 
     //Para leer los valores de los formularios en tiempo real
     useEffect(() => {
-        // console.log(values);
-        // console.log('Validations ', validations);
+        console.log(values);
+        console.log('Validations ', validations);
         // isChecked ? setValues(prev => ({...prev, isFinal: 'x'})) :setValues(prev => ({...prev, isFinal: ''}))
         validateAll(validations) ? stateFunction(true) : stateFunction(false);
     }, [values, validations])
@@ -46,35 +48,31 @@ const AutoevaluacionCualitativa = ({ stateFunction, componentName, auth }) => {
 
     return (
         <>
-            <p>AutoevaluacionCualitativa</p>
-            <div className="formData__group AUT_CUAL__custom">
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="bimester">Bimestre</label>
-                    <select className="formData__select" name="bimester" id="bimester" onChange={handleChange}>
-                        <option value={''}>Selecciona una opcion</option>
-                        {/* Renderiza los semestres en el SELECT */}
-                        {semesterCounter.map((elem) => {
+            <div className="formdata__group mb-5p">
+                <div className="formdata__options">
+                    <InputSelect
+                        handleChange={handleChange}
+                        label={'Bimestre de la evaluacion'}
+                        name={'bimester'}
+                        renderArray={semesterCounter.map((elem) => {
                             return <option key={String(elem)} value={String(elem)}>{String(elem)}</option>
                         })}
-                    </select>
-                </div>
-                <div className="formData__block">
-                    <label className="formData__label" htmlFor="bimester">Final?</label>
-                    <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
+                        value={values.bimester}
+                        completed={validations.bimester}
+                        popover={true}
+                        popoverText="Este es el bimestre actual de la evaluacion"
                     />
                 </div>
             </div>
-            <ul className='validationList'>
-                {values.bimester === '' ? (
-                    <div className="validationList__item">
-                        <Icon icon={'warning'} customIconClassName='warning'></Icon>
-                        <p>Seleccione un semestre</p>
-                    </div>
-                ) : null}
-            </ul>
+
+             {/* Evaluacion final? */}
+            <InputCheckbox
+                handleChange={handleCheckboxChange}
+                label='Es esta la ultima evaluacion?'
+                popover={true}
+                popoverText="Indicación si es la ultima evaluación"
+                isChecked={isChecked}
+            />
             <div className={`dropdown`}>
                 <a className={`btn btn-secondary dropdown-toggle ${!validations.bimester ? 'disabled' : ''}`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Descargar
