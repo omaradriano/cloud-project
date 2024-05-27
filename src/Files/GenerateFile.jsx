@@ -31,17 +31,27 @@ const GenerateFile = () => {
     //Contexto que tiene la autenticación
     const { authentication } = useContext(AuthContext)
 
+    useEffect(() => {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
+        // Devuelve una función de limpieza para detener las instancias del popover cuando el componente se desmonte
+        return () => {
+            popoverList.forEach(popover => popover.dispose());
+        };
+    }, []);
+
     return (
         <>
             <div className="fillfile">
-                <Link className={`btn btn__back`} to={`/generalform`}><Icon icon={'arrow_left'}></Icon>Formulario general</Link>
+                <Link className={`btn btn__back`} to={`/generalform`}><Icon icon={'arrow_left'}></Icon>Atras</Link>
                 <h1>Llenado de documento</h1>
                 <div className="accordion accordion-flush" id="documents">
                     {fileKeys.map((elem, index) => {
                         let name = SS_files[elem].name.split(' ').join("")
                         // console.log('from idk ',name);
                         let renderedComponent = null
-                        let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")    
+                        let componentName = SS_files[fileKeys[index]].name.split(' ').join("").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                         // console.log(componentName);s
                         switch (componentName) {
                             case 'formatodeautoevaluacioncualitativa':
