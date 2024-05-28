@@ -6,12 +6,13 @@ import { months } from "../utils/some_aux";
 import { AuthContext } from "../Context/Context";
 import { Link } from "react-router-dom";
 
-import bisonte from '../assets/imgs/bisontepapel.png'
+import { ToastContainer } from 'react-toastify';
 
 import { validateAll, handleValidations } from "../utils/forms_functions";
 import { serverDomain } from "../config";
 import InputText from "./Components/InputText";
 import InputSelect from "./Components/InputSelect";
+import { generateToast } from "../utils/generateToast";
 
 const GeneralForm = () => {
 
@@ -154,10 +155,15 @@ const GeneralForm = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="files">
                 {/* <img src={bisonte} alt="Imagen de bisonte con un papel awwww" className="form-bg"/> */}
                 <div className="formData">
-                    <input type="button" value="Guardar" className={`btn btn__save`} onClick={() => submitData()} />
+                    <input type="button" value="Guardar" className={`btn btn__save`} onClick={() => {
+                        submitData()
+                        console.log('Toast');
+                        generateToast('success', 'Información actualizada')
+                    }} />
                     {/* <input type="button" value="Llenar formularios" className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`}/> */}
                     <Link className={`btn btn__tofill ${!validationsCompleted ? 'disabled' : ''}`} to={`/filesfill`}>Llenado de documentos <Icon icon={'arrow_forward'}></Icon></Link>
 

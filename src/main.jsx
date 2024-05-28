@@ -9,6 +9,8 @@ import './styles/media-1200.css'
 
 import 'material-icons/iconfont/material-icons.css';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   RouterProvider
 } from "react-router-dom";

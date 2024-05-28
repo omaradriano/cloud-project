@@ -7,6 +7,7 @@ import { serverDomain } from "../../config";
 import InputRadios from "../Components/InputRadios";
 import InputText from "../Components/InputText";
 import InputTextarea from "../Components/InputTextarea";
+import { generateToast } from "../../utils/generateToast";
 
 const CartaAsignacion = ({ componentName, auth }) => {
 
@@ -90,7 +91,10 @@ const CartaAsignacion = ({ componentName, auth }) => {
     return (
         <>
             <h5>Carta de Asignación</h5>
-            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
+            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => {
+                submitData(auth, values, componentName, serverDomain)
+                generateToast('success', 'Información guardada')
+                }} />
 
             {/* Creditos aprobados */}
             <InputText

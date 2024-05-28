@@ -15,6 +15,8 @@ import FormularioSolicitud from "../Files/Templates/FormularioSolicitud"
 import PlanTrabajo from "../Files/Templates/PlanTrabajo"
 import Icon from "../UtilComponents/Icon"
 
+import { ToastContainer } from 'react-toastify';
+
 const fileKeys = Object.keys(SS_files)
 
 const GenerateFile = () => {
@@ -43,6 +45,7 @@ const GenerateFile = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="fillfile">
                 <Link className={`btn btn__back`} to={`/generalform`}><Icon icon={'arrow_left'}></Icon>Atras</Link>
                 <h1>Llenado de documento</h1>
