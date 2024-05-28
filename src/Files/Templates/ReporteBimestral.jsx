@@ -7,6 +7,7 @@ import Icon from "../../UtilComponents/Icon"
 import InputSelect from "../Components/InputSelect"
 import InputTextarea from "../Components/InputTextarea"
 import InputText from "../Components/InputText"
+import { generateToast } from "../../utils/generateToast"
 
 const ReporteBimestral = ({ componentName, auth }) => {
 
@@ -14,10 +15,10 @@ const ReporteBimestral = ({ componentName, auth }) => {
     const [values, setValues] = useState({
         n_report: '',
         sp_d: '',
-        sp_m: 'Enero',
+        sp_m: '',
         sp_y: '',
         ep_d: '',
-        ep_m: "Enero",
+        ep_m: "",
         ep_y: '',
         activities_desc: '',
         hours_in_period: '',
@@ -75,7 +76,10 @@ const ReporteBimestral = ({ componentName, auth }) => {
     }, [values])
     return (
         <>
-            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
+            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => {
+                submitData(auth, values, componentName, serverDomain)
+                generateToast('success', 'Información guardada')
+            }} />
 
             {/*  ----------------- Validar el numero de reporte que es ----------------- */}
             <InputSelect

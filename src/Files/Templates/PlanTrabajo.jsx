@@ -7,21 +7,22 @@ import { serverDomain } from "../../config"
 import InputSelect from "../Components/InputSelect"
 import InputTextarea from "../Components/InputTextarea"
 import InputText from "../Components/InputText"
+import { generateToast } from "../../utils/generateToast"
 
 const PlanTrabajo = ({ componentName, auth }) => {
     //Valores que se utilizan en  el formulario de autoevaluacion cualitativa
     const [values, setValues] = useState({
         p_1_d: '',
-        p_1_m: 'Enero',
+        p_1_m: '',
         p_1_y: '',
         p_2_d: '',
-        p_2_m: 'Enero',
+        p_2_m: '',
         p_2_y: '',
         p_3_d: '',
-        p_3_m: 'Enero',
+        p_3_m: '',
         p_3_y: '',
         fp_d: '',
-        fp_m: 'Enero',
+        fp_m: '',
         fp_y: '',
         p_1_activities: '',
         p_1_people: '',
@@ -91,6 +92,11 @@ const PlanTrabajo = ({ componentName, auth }) => {
     }, [values])
     return (
         <>
+            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`}
+                onClick={() => {
+                    submitData(auth, values, componentName, serverDomain)
+                    generateToast('success', 'Información guardada')
+                }} />
             {/*  ----------------- Validar primer periodo ----------------- */}
             <div className="formdata__group mb-5p">
                 <h4>Primer periodo</h4>
@@ -316,7 +322,7 @@ const PlanTrabajo = ({ componentName, auth }) => {
                     <li><a className="dropdown-item" href="#" onClick={() => generateDocument(componentName, 'docx', auth, { ...values })}>DOCX</a></li>
                 </ul>
             </div>
-            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
+
         </>
     )
 }

@@ -4,6 +4,9 @@ import { AuthContext } from "../Context/Context"
 import { SS_files } from "../utils/files"
 import { Link } from "react-router-dom"
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 //Plantillas de los campos restantes para el formulario de generacion
 import CartaCompromiso from "../Files/Templates/CartaCompromiso"
 import AutoevaluacionCualitativa from "../Files/Templates/AutoevaluacionCualitativa"
@@ -43,6 +46,7 @@ const GenerateFile = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="fillfile">
                 <Link className={`btn btn__back`} to={`/generalform`}><Icon icon={'arrow_left'}></Icon>Atras</Link>
                 <h1>Llenado de documento</h1>

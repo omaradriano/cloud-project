@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { generateDocument, handleValidations, submitData, validateAll } from "../../utils/forms_functions";
-import Input from "../Components/Input";
 import { months } from "../../utils/some_aux";
 import { serverDomain } from "../../config";
 import Icon from "../../UtilComponents/Icon";
 import InputSelect from "../Components/InputSelect";
 import InputTextarea from "../Components/InputTextarea";
 import InputRadios from "../Components/InputRadios";
+import { generateToast } from "../../utils/generateToast";
 
-const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
+const FormularioSolicitud = ({ componentName, auth }) => {
 
     //Valores que se utilizan en  el formulario de autoevaluacion cualitativa
     const [values, setValues] = useState({
@@ -96,7 +96,10 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
     return (
         <>
             {/*  ----------------- Periodo ----------------- */}
-            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => submitData(auth, values, componentName, serverDomain)} />
+            <input type="button" value="Guardar" className={`btn btn__save btn__save--file`} onClick={() => {
+                submitData(auth, values, componentName, serverDomain)
+                generateToast('success', 'Información guardada')
+            }} />
 
             {/* Periodo del servicio */}
             <InputSelect
@@ -167,15 +170,15 @@ const FormularioSolicitud = ({ stateFunction, componentName, auth }) => {
             <InputRadios
                 handleChange={handleChange}
                 options={{
-                    optionValues: ['Educacion para adultos', 'Actividades cívicas', 'Desarrollo sustentable', 'Desarrollo de comunidad', 'Actividades culturales','Apoyo a la salud','Actividades deportivas','Medio ambiente','Otros'],
-                    optionKeys: ['t_1','t_2','t_3','t_4','t_5','t_6','t_7','t_8','t_9',]
+                    optionValues: ['Educacion para adultos', 'Actividades cívicas', 'Desarrollo sustentable', 'Desarrollo de comunidad', 'Actividades culturales', 'Apoyo a la salud', 'Actividades deportivas', 'Medio ambiente', 'Otros'],
+                    optionKeys: ['t_1', 't_2', 't_3', 't_4', 't_5', 't_6', 't_7', 't_8', 't_9',]
                 }}
                 label='Tipo de programa'
                 name={'activity_type'}
                 value={values.activity_type}
                 completed={validations.activity_type}
                 keyword='formulariosolicitud'
-                
+
             />
             {/* <div className="formData__group--list">
                 <label className="formData__label">Tipo de programa</label>
