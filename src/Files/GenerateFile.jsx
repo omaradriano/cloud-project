@@ -4,9 +4,6 @@ import { AuthContext } from "../Context/Context"
 import { SS_files } from "../utils/files"
 import { Link } from "react-router-dom"
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 //Plantillas de los campos restantes para el formulario de generacion
 import CartaCompromiso from "../Files/Templates/CartaCompromiso"
 import AutoevaluacionCualitativa from "../Files/Templates/AutoevaluacionCualitativa"
@@ -17,6 +14,8 @@ import ReporteBimestral from "../Files/Templates/ReporteBimestral"
 import FormularioSolicitud from "../Files/Templates/FormularioSolicitud"
 import PlanTrabajo from "../Files/Templates/PlanTrabajo"
 import Icon from "../UtilComponents/Icon"
+
+import { ToastContainer } from 'react-toastify';
 
 const fileKeys = Object.keys(SS_files)
 

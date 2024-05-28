@@ -1,5 +1,7 @@
 import {
-    createBrowserRouter
+    HashRouter,
+    createBrowserRouter,
+    createHashRouter
 } from "react-router-dom";
 
 import Auth from '../Body/Auth.jsx'
@@ -26,23 +28,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "auth", //Renderiza el registro y autenticación del usuario
-                element: <Auth/>,
+                element: <Auth />,
             },
             {
                 path: "filesfill", //Aquí se llenan los formularios para descargar un documento
-                element: <ProtectedRoute><GenerateFile/></ProtectedRoute>
+                element: <ProtectedRoute><GenerateFile /></ProtectedRoute>
             },
             {
                 path: "profile", //Perfil de usuario
-                element: <ProtectedRoute><Profile/></ProtectedRoute>,
+                element: <ProtectedRoute><Profile /></ProtectedRoute>,
             },
             {
                 path: "generalform", //Formulario general previo a la vista para descargar documentos
-                element: <ProtectedRoute><GeneralForm/></ProtectedRoute>,
+                element: <ProtectedRoute><GeneralForm /></ProtectedRoute>,
             },
             {
                 path: "testform", //Formulario general previo a la vista para descargar documentos
-                element: <TestForm/>
+                element: <TestForm />
             },
         ]
     },
