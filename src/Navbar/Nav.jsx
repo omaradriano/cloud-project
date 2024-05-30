@@ -30,14 +30,14 @@ const Nav = () => {
                 {width > 768 ? (
                     <ul className='nav__options'>
                         {/* Estas opciones van a ser un Link de react router */}
-                        <a href="#">Nosotros</a>
+                        {/* <a href="#">Nosotros</a> */}
                         {/* <a href="#">Mis documentos</a> */}
                         {!authentication ? (
                             <Link to={`/auth`}>Iniciar Sesion</Link>
                         ) : (
                             <>  
                                 <Link to={`/home`} className='dropdown-item'>Inicio</Link>
-                                <Link to={`/profile`}>Perfil</Link>
+                                {/* <Link to={`/profile`}>Perfil</Link> */}
                                 <Link onClick={() => {
                                     signOut(auth).then(() => {
                                         localStorage.removeItem('generalUserData')
@@ -49,8 +49,8 @@ const Nav = () => {
                             </>
                         )}
                         {/* <a href="#">Perfil</a> */}
-                        <a href="#">Foro</a>
-                        <a href="#">Panel</a>
+                        {/* <a href="#">Foro</a> */}
+                        {/* <a href="#">Panel</a> */}
                     </ul>
                 ) : (
                     <>
@@ -65,7 +65,7 @@ const Nav = () => {
                                     <li><Link to='/auth' className='dropdown-item'>Iniciar Sesion</Link></li>
                                 ) : (
                                     <>
-                                        <li><Link to={`/profile`} className='dropdown-item'>Perfil</Link></li>
+                                        {/* <li><Link to={`/profile`} className='dropdown-item'>Perfil</Link></li> */}
                                         <li><Link onClick={() => {
                                             signOut(auth).then(() => {
                                                 localStorage.removeItem('generalUserData')
